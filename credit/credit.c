@@ -29,12 +29,11 @@ int main(void)
         card_number /= 10;
     }
 
-    // Restore the original card number
-    card_number = get_long("Number: ");
-
-    // Check the card validity and determine the card type
+    // Determine the card type and validity
     if (sum % 10 == 0)
     {
+        card_number = get_long("Number: ");
+
         if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
         {
             printf("VISA\n");
