@@ -9,12 +9,11 @@ int main(void)
 
     // Get the credit card number from the user
     card_number = get_long("Number: ");
-    long temp_card_number = card_number; // Store the original card number
 
     // Calculate the sum of the digits as per Luhn's algorithm
-    while (temp_card_number > 0)
+    while (card_number > 0)
     {
-        int digit = temp_card_number % 10;
+        int digit = card_number % 10;
         digit_count++;
 
         if (digit_count % 2 == 0)
@@ -27,8 +26,11 @@ int main(void)
             sum += digit;
         }
 
-        temp_card_number /= 10;
+        card_number /= 10;
     }
+
+    // Restore the original card number
+    card_number = get_long("Number: ");
 
     // Determine the card type and validity
     if (sum % 10 == 0)
