@@ -29,18 +29,21 @@ int main(void)
         card_number /= 10;
     }
 
+    // Restore the original card number
+    card_number = get_long("Number: ");
+
     // Check the card validity and determine the card type
     if (sum % 10 == 0)
     {
-        if ((digit_count == 13 || digit_count == 16) && (card_number == 4))
+        if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
         {
             printf("VISA\n");
         }
-        else if (digit_count == 16 && (card_number == 51 || card_number == 52 || card_number == 53 || card_number == 54 || card_number == 55))
+        else if (digit_count == 16 && (card_number / 100000000000000 >= 51 && card_number / 100000000000000 <= 55))
         {
             printf("MASTERCARD\n");
         }
-        else if (digit_count == 15 && (card_number == 34 || card_number == 37))
+        else if (digit_count == 15 && (card_number / 10000000000000 == 34 || card_number / 10000000000000 == 37))
         {
             printf("AMEX\n");
         }
