@@ -19,6 +19,12 @@ int main(void)
     printf("hello, %s\n", answer);
     //run make hello again in the terminal
     //then run the updated program
+    //updated way to prompt for 2 answers to 2 questions
+    //create 2 new String variables for firstName and lastName
+    string firstName = get_string("What's your First name? ");
+    string lastName = get_string("What's your Last name? ");
+    //add another %s to display user String input
+    printf("hello, %s %s\n", firstName, lastName);
 }
 // in terminal to compile from source code in C to machine code (binary 0s and 1s)
 // $ make hello
