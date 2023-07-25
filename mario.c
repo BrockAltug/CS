@@ -17,15 +17,16 @@ int get_size(void)
 {
     //new int for n
     int n;
-    //do makes the code do something
+    //do while loop
     do
+    //do -
     {
         //get user input for size of n variable as an integer
         n = get_int("Size: ");
     }
-    //while n is less than 1
+    //do this while n is less than 1
     while (n < 1);
-    //return the value of n
+    //return the value of n to the method
     return n;
 }
 
