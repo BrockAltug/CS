@@ -3,6 +3,7 @@
 
 int main(void)
 {
+    // Initialize variables
     long long card_number;
     int digit_count = 0;
     int sum = 0;
@@ -14,26 +15,30 @@ int main(void)
     // Calculate the sum of the digits as per Luhn's algorithm
     while (temp_card_number > 0)
     {
+        // Get the rightmost digit
         int digit = temp_card_number % 10;
         digit_count++;
 
         if (digit_count % 2 == 0)
         {
+            // For every other digit from the right, double and add the digits of the product
             int product = digit * 2;
             sum += (product / 10) + (product % 10);
         }
         else
         {
+            // For the remaining digits, simply add them to the sum
             sum += digit;
         }
 
+        // Remove the rightmost digit for the next iteration
         temp_card_number /= 10;
     }
 
     // Determine the card type and validity
     if (sum % 10 == 0)
     {
-        // check the card type and print the result
+        // Check the card type and print the result
         long long first_two_digits = card_number / 10000000000000;
         long long first_digit = card_number / 1000000000000000;
 
