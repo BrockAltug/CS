@@ -5,10 +5,10 @@ int main(void)
 {
     printf("Give 2 values for x and y\n");
     // Prompt user for x
-    int x = get_int("x: ");
+    int x = get_long("x: ");
 
     // Prompt user for y
-    int y = get_int("y: ");
+    int y = get_long("y: ");
 
     // Perform addition
     //for user input return 1 int value %i after adding x + y values
