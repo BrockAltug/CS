@@ -3,13 +3,13 @@
 
 int main(void)
 {
-    long card_number;
+    long long card_number;
     int digit_count = 0;
     int sum = 0;
 
     // Get the credit card number from the user
-    card_number = get_long("Number: ");
-    long temp_card_number = card_number; // Store the original card number
+    card_number = get_long_long("Number: ");
+    long long temp_card_number = card_number; // Store the original card number
 
     // Calculate the sum of the digits as per Luhn's algorithm
     while (temp_card_number > 0)
@@ -34,15 +34,18 @@ int main(void)
     if (sum % 10 == 0)
     {
         // Check the card type and print the result
-        if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
+        long long first_two_digits = card_number / 10000000000000;
+        long long first_digit = card_number / 1000000000000000;
+
+        if ((digit_count == 13 || digit_count == 16) && (first_digit == 4))
         {
             printf("VISA\n");
         }
-        else if (digit_count == 16 && (card_number / 100000000000000 >= 51 && card_number / 100000000000000 <= 55))
+        else if (digit_count == 16 && (first_two_digits >= 51 && first_two_digits <= 55))
         {
             printf("MASTERCARD\n");
         }
-        else if (digit_count == 15 && (card_number / 10000000000000 == 34 || card_number / 10000000000000 == 37))
+        else if (digit_count == 15 && (first_two_digits == 34 || first_two_digits == 37))
         {
             printf("AMEX\n");
         }
