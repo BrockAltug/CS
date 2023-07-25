@@ -30,14 +30,14 @@ int get_size(void)
     return n;
 }
 
-//void method named print_grid getting an integer value
-void print_grid(int n)
+//void method named print_grid using an integer value
+void print_grid(int size)
 {
-    //starting from 0. until the value of n (user input), add 1
-    for (int i = 0; i < n; i++)
+    //starting from 0. until the value of size (user input), add 1
+    for (int i = 0; i < size; i++)
     {
         //nested loop to print rows and colums
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < size; j++)
         {
             //print the grid based on user input
             printf("#");
