@@ -9,11 +9,12 @@ int main(void)
 
     // Get the credit card number from the user
     card_number = get_long("Number: ");
+    long temp_card_number = card_number; // Store the original card number
 
     // Calculate the sum of the digits as per Luhn's algorithm
-    while (card_number > 0)
+    while (temp_card_number > 0)
     {
-        int digit = card_number % 10;
+        int digit = temp_card_number % 10;
         digit_count++;
 
         if (digit_count % 2 == 0)
@@ -26,14 +27,12 @@ int main(void)
             sum += digit;
         }
 
-        card_number /= 10;
+        temp_card_number /= 10;
     }
 
     // Determine the card type and validity
     if (sum % 10 == 0)
     {
-        card_number = get_long("Number: ");
-
         if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
         {
             printf("VISA\n");
