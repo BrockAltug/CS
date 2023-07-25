@@ -1,42 +1,49 @@
 #include <cs50.h>
 #include <stdio.h>
 
-//new method to get
+//method to get height from user input
 int get_height(void) {
-    int n;
+    //new integer variable for height
+    int height;
+    //do while loop
     do {
-        n = get_int("Height: ");
-    } while (n < 1 || n > 8);
-
-    return n;
+        //get user input for height
+        height = get_int("Height: ");
+        //while height is less than 1 or greater than 8, keep prompting the user
+    } while (height < 1 || height > 8);
+    //return the value of height to the method
+    return height;
 }
-//method to print out the pyramid level pattern
+
+//method to draw the pyramid platform shape
+//using int for height
 void draw_pyramid(int height) {
-    //for loop, starting from 1 until the user input height, add 1
+    //starting from 1 until user input for height, add 1
     for (int i = 1; i <= height; i++) {
-        //draw left pyramid
-        //nested loop
-        //starting from 0 until height minus i add 1
+        // draw left pyramid spaces
+        //nested loop starting from 0 until the height - 1, add 1
         for (int j = 0; j < height - i; j++) {
             printf(" ");
         }
+        // Draw left pyramid hashes
         for (int j = 0; j < i; j++) {
             printf("#");
         }
 
-        // Draw gap
+        // Draw gap between pyramids
         printf("  ");
 
-        // Draw right pyramid
+        // Draw right pyramid hashes
         for (int j = 0; j < i; j++) {
             printf("#");
         }
 
-        printf("\n");
+        printf("\n");   // Move to the next line after drawing each pyramid level
     }
 }
-//main method
+
 int main(void) {
-    int height = get_height();
-    draw_pyramid(height);
+    int height = get_positive_integer();   // Get the height from the user
+    draw_pyramid(height);   // Draw the pyramid with the provided height
+    return 0;   // Indicate successful program execution
 }
