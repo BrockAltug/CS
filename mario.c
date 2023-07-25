@@ -1,19 +1,35 @@
+#include <cs50.h>
 #include <stdio.h>
+
+int get_size(void);
+void print_grid(int n);
 
 int main(void)
 {
-    //for loop
-    //starting from 0 until 3, add1
-    for (int i = 0; i < 3; i++)
+    int n = get_size();
+    print_grid(n);
+}
+
+int get_size(void)
+{
+    int n;
+    do
     {
-        //nested loop, a loop inside of a loop
-        //starting from 0 until 3 add 1
-        for (int j = 0; j < 3; j++)
+        n = get_int("Size: ");
+    }
+    while (n < 1);
+    return n;
+}
+
+//
+void print_grid(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
         {
-            //print a grid
             printf("#");
         }
-        //print a new line
         printf("\n");
     }
 }
