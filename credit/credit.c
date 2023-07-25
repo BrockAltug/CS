@@ -26,7 +26,8 @@ int main(void)
             digit *= 2;
 
             // Add the individual digits of the product to the sum
-            sum += digit / 10 + digit % 10;
+            digit = (digit / 10) + (digit % 10); // Split the two-digit product and add its digits
+            sum += digit; // Add the result to the sum
         }
         else
         {
@@ -41,10 +42,10 @@ int main(void)
     if (sum % 10 == 0)
     {
         // Determine the type of credit card (AMEX, MASTERCARD, VISA, or INVALID)
-        int first_two_digits = card_number;
+        int first_two_digits = card_number; // Get the first two digits of the credit card number
         while (first_two_digits > 100)
         {
-            first_two_digits /= 10;
+            first_two_digits /= 10; // Keep dividing by 10 until only two digits remain
         }
 
         if ((count == 15 && (first_two_digits == 34 || first_two_digits == 37)))
