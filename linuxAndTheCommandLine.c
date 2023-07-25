@@ -8,7 +8,7 @@
 //rm - for removing (deleting) files
 //rmdir - for removing (deleting) directories
 //The most commonly used is ls which will list all the files in the current directory or directory.
-// Go ahead and type ls into the terminal window and hit enter. You’ll see all the files in the current folder.
+//Go ahead and type ls into the terminal window and hit enter. You’ll see all the files in the current folder.
 //Another useful command is mv, where you can move a file from one file to another. For example,
 //you could use this command to rename Hello.c (notice the uppercase H) to hello.c by typing mv Hello.c hello.c.
 //You can also create folders. You can type mkdir pset1 to create a directory called pset1.
