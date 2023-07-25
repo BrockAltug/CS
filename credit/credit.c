@@ -29,18 +29,20 @@ int main(void)
         card_number /= 10;
     }
 
-    // Determine the card type and validity
+    // Check the card validity and determine the card type
     if (sum % 10 == 0)
     {
-        if (digit_count == 15 && (card_number / 10 == 34 || card_number / 10 == 37))
+        card_number *= 10; // Restore the last digit of the credit card number
+
+        if ((digit_count == 15) && (card_number / 10000000000000 == 34 || card_number / 10000000000000 == 37))
         {
             printf("AMEX\n");
         }
-        else if (digit_count == 16 && (card_number / 100 >= 51 && card_number / 100 <= 55))
+        else if ((digit_count == 16) && (card_number / 100000000000000 >= 51 && card_number / 100000000000000 <= 55))
         {
             printf("MASTERCARD\n");
         }
-        else if ((digit_count == 13 || digit_count == 16) && card_number / 1000 == 4)
+        else if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
         {
             printf("VISA\n");
         }
