@@ -33,7 +33,7 @@ int main(void)
     // Determine the card type and validity
     if (sum % 10 == 0)
     {
-        // Check the card type and print the result
+        // check the card type and print the result
         long long first_two_digits = card_number / 10000000000000;
         long long first_digit = card_number / 1000000000000000;
 
