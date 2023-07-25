@@ -19,31 +19,37 @@ int get_height(void) {
 //using int for height
 void draw_pyramid(int height) {
     //starting from 1 until user input for height, add 1
+    //it is responsible for drawing each level (row) of the pyramid.
     for (int i = 1; i <= height; i++) {
         // draw left pyramid spaces
         //nested loop starting from 0 until the height - 1, add 1
+        //the number of spaces to draw in each row decreases as the row number increases.
         for (int j = 0; j < height - i; j++) {
             printf(" ");
         }
-        // Draw left pyramid hashes
+        // draw left pyramid hashes
+        // used to draw the # symbols on the left side of the pyramid.
         for (int j = 0; j < i; j++) {
             printf("#");
         }
 
-        // Draw gap between pyramids
+        // draw gap between pyramids
         printf("  ");
 
-        // Draw right pyramid hashes
+        // draw right pyramid hashes
+        //used to draw the # symbols on the right side of the pyramid
         for (int j = 0; j < i; j++) {
             printf("#");
         }
 
-        printf("\n");   // Move to the next line after drawing each pyramid level
+        // move to the next line after drawing each pyramid level
+        printf("\n");
     }
 }
 
 int main(void) {
-    int height = get_positive_integer();   // Get the height from the user
-    draw_pyramid(height);   // Draw the pyramid with the provided height
-    return 0;   // Indicate successful program execution
+    //new integer for height calling to the get_height() method to get the height of the level
+    int height = get_height();
+    //call to the draw_pyramid() method to draw the level using height from the get_height() method
+    draw_pyramid(height);
 }
