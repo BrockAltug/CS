@@ -32,19 +32,17 @@ int main(void)
     // Check the card validity and determine the card type
     if (sum % 10 == 0)
     {
-        card_number *= 10; // Restore the last digit of the credit card number
-
-        if ((digit_count == 15) && (card_number / 10000000000000 == 34 || card_number / 10000000000000 == 37))
+        if ((digit_count == 13 || digit_count == 16) && (card_number == 4))
         {
-            printf("AMEX\n");
+            printf("VISA\n");
         }
-        else if ((digit_count == 16) && (card_number / 100000000000000 >= 51 && card_number / 100000000000000 <= 55))
+        else if (digit_count == 16 && (card_number == 51 || card_number == 52 || card_number == 53 || card_number == 54 || card_number == 55))
         {
             printf("MASTERCARD\n");
         }
-        else if ((digit_count == 13 || digit_count == 16) && (card_number / 1000000000000 == 4))
+        else if (digit_count == 15 && (card_number == 34 || card_number == 37))
         {
-            printf("VISA\n");
+            printf("AMEX\n");
         }
         else
         {
