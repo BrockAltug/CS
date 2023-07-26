@@ -6,7 +6,9 @@ int get_negative_int(void);
 //main method
 int main(void)
 {
+    //call to get_negative_int method to return user input for negative number
     int i = get_negative_int();
+    //print out user negative integer value
     printf("%i\n", i);
 }
 
@@ -21,8 +23,8 @@ int get_negative_int(void)
         //prompts for user input
         userInput = get_int("Negative Integer: ");
     }
-    //while
-    
+    //while user input is greater than or equal to 0, prompt user for negative integer
     while (userInput >= 0);
+    //return user input
     return userInput;
 }
