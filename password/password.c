@@ -1,12 +1,14 @@
+// Include necessary header files
 #include <cs50.h>
 #include <ctype.h>
 
-// Function prototype to check if the password meets the required criteria
+// Function prototype
 bool valid(string password);
 
+// Main function
 int main(void)
 {
-    // Get the password input from the user
+    // Get password input from the user
     string password = get_string("Enter your password: ");
 
     // Check if the password is valid using the valid function
