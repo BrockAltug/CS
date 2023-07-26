@@ -1,3 +1,4 @@
+// Include necessary header files
 #include <cs50.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -9,6 +10,7 @@ int count_words(string text);
 int count_sentences(string text);
 int calculate_grade_level(int letters, int words, int sentences);
 
+// Main function
 int main(void)
 {
     // Get input text from the user
