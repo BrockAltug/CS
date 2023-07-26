@@ -49,14 +49,14 @@
 // Method 3: Searching for a name and corresponding number in arrays of strings
  int main(void)
 {
- Arrays of strings
+// Arrays of strings
     string names[] = {"Carter", "David"};
     string numbers[] = {"+1-617-495-1000", "+1-949-468-2750"};
 
- Get input name from the user
+// Get input name from the user
     string name = get_string("Name: ");
 
- Search for the name and corresponding number in the array
+// Search for the name and corresponding number in the array
     for (int i = 0; i < 2; i++)
     {
         if (strcmp(names[i], name) == 0)
