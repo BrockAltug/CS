@@ -4,7 +4,7 @@ How do you know?: TODO
 
 sort2 uses: Merge Sort
 
-How do you know?: it is the fastest method when sorting a large database (random50000.txt) it divides the list into two repeatedly and then merges the smaller lists back into a larger one in the correct order.
+How do you know?: It is the faster method when sorting a large database (random50000.txt) it divides the list into two repeatedly and then merges the smaller lists back into a larger one in the correct order.
 It is well-suited for large datasets and generally outperforms Bubble Sort and Selection Sort.
 
 sort3 uses: TODO
