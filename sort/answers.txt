@@ -1,12 +1,12 @@
-sort1 uses: TODO
+sort1 uses: Bubble Sort
 
-How do you know?: TODO
+How do you know?: compares pairs of adjacent values one at a time and swaps them if they are in the incorrect order. This continues until the list is sorted. This is the longest method to sort
 
 sort2 uses: Merge Sort
 
-How do you know?: It is the faster method when sorting a large database (random50000.txt) it divides the list into two repeatedly and then merges the smaller lists back into a larger one in the correct order.
+How do you know?: It is the faster method when sorting a large database (sorts random50000.txt fastest compared to the other 2 sorting methods) it divides the list into two repeatedly and then merges the smaller lists back into a larger one in the correct order.
 It is well-suited for large datasets and generally outperforms Bubble Sort and Selection Sort.
 
 sort3 uses: Selection Sort
 
-How do you know?: It performs a smaller number of swaps compared to bubble sort; therefore, even though both sorting methods are of O(N2), selection sort performs faster and more efficiently, 
+How do you know?: It performs a smaller number of swaps compared to bubble sort; therefore, even though both sorting methods are of O(N2), selection sort performs faster and more efficiently (faster than sort1 but slower than sort2 when performing reversed10000.txt and reversed50000.txt),
