@@ -1,10 +1,10 @@
-// Include the cs50 library for get_string() function
+// include the cs50 library for get_string() function
 #include <cs50.h>
-// Include the ctype library for character handling functions
+// include the ctype library for character handling functions
 #include <ctype.h>
-// Include the standard input/output library
+// include the standard input/output library
 #include <stdio.h>
-// Include the string library for string manipulation functions
+// include the string library for string manipulation functions
 #include <string.h>
 
 int main(void)
