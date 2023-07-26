@@ -38,22 +38,22 @@ int main(void)
 float calc_hours(int hours[], int weeks, char output)
 {
     // calculate the total hours
-    //if user input is T or t
+    // if user input is T or t
     if (output == 'T' || output == 't')
     {
-        //new int for calculating total hours starting from 0
+        // new int for calculating total hours starting from 0
         int total_hours = 0;
-        //for loop starting from the first element until the number of weeks, check the next element
+        // for loop starting from the first element until the number of weeks, check the next element
         for (int i = 0; i < weeks; i++)
         {
-            //add the element value to the total hours value and repeat the loop until all weeks are added
+            // add the element value to the total hours value and repeat the loop until all weeks are added
             total_hours += hours[i];
         }
-        //return the value of the total numbers
-        return (float)total_hours;
+        // return the value of the total numbers
+        return (float) total_hours;
     }
     // calculate the average hours per week
-    //else if the user input is A or a
+    // else if the user input is A or a
     else if (output == 'A' || output == 'a')
     {
         int total_hours = 0;
@@ -61,9 +61,9 @@ float calc_hours(int hours[], int weeks, char output)
         {
             total_hours += hours[i];
         }
-        return (float)total_hours / weeks;
+        return (float) total_hours / weeks;
     }
 
-    // If the provided 'output' parameter is not 'T' or 'A', return -1 as an error indicator
+    // if the provided 'output' parameter is not 'T' or 'A', return -1 as an error indicator
     return -1;
 }
