@@ -3,10 +3,10 @@
 
 int main(void)
 {
-    // Prompt user to agree with new char value c
+    // prompt user to agree with new char value c
     char c = get_char("Do you agree? Y/N");
 
-    // Check whether agreed
+    // check whether agreed
     // if user answer is caps Y || (or) lowercase y
     // single Char are in single quotes ' '
     if (c == 'Y' || c == 'y')

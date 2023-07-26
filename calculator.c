@@ -8,10 +8,10 @@ int main(void)
     //  Prompt user for x
     int x = get_long("x: ");
 
-    // Prompt user for y
+    // prompt user for y
     int y = get_long("y: ");
 
-    // Perform addition
+    // perform addition
     // for user input return 1 int value %i after adding x + y values
     printf("x + y = %i\n", x + y);
 }

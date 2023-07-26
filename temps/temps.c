@@ -7,8 +7,7 @@ typedef struct
 {
     string city;
     int temp;
-}
-avg_temp;
+} avg_temp;
 
 avg_temp temps[NUM_CITIES];
 
@@ -16,6 +15,7 @@ void sort_cities(void);
 
 int main(void)
 {
+    // initialize the average temperature data for each city
     temps[0].city = "Austin";
     temps[0].temp = 97;
 
@@ -46,10 +46,12 @@ int main(void)
     temps[9].city = "San Francisco";
     temps[9].temp = 66;
 
+    // sort cities by temperature in descending order
     sort_cities();
 
     printf("\nAverage July Temperatures by City\n\n");
 
+    // print the sorted cities and their temperatures
     for (int i = 0; i < NUM_CITIES; i++)
     {
         printf("%s: %i\n", temps[i].city, temps[i].temp);
@@ -59,19 +61,21 @@ int main(void)
 // Bubble Sort algorithm to sort cities by temperature in descending order
 void sort_cities(void)
 {
+    // outer loop to iterate through all elements in the array
     for (int i = 0; i < NUM_CITIES - 1; i++)
     {
+        // inner loop to compare adjacent elements and swap them if needed
         for (int j = 0; j < NUM_CITIES - i - 1; j++)
         {
-            // Compare the temperatures and swap the cities if the current temperature is less than the next temperature
+            // compare the temperatures and swap the cities if the current temperature is less than the next temperature
             if (temps[j].temp < temps[j + 1].temp)
             {
-                // Swap the cities' temperatures
+                // swap the cities' temperatures
                 int temp_temp = temps[j].temp;
                 temps[j].temp = temps[j + 1].temp;
                 temps[j + 1].temp = temp_temp;
 
-                // Swap the cities' names
+                // swap the cities' names
                 string temp_city = temps[j].city;
                 temps[j].city = temps[j + 1].city;
                 temps[j + 1].city = temp_city;
