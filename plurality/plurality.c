@@ -39,17 +39,21 @@ int main(int argc, string argv[])
         printf("Maximum number of candidates is %i\n", MAX);
         return 2;
     }
+
+    // Assign names of candidates from command-line arguments and initialize their vote count to 0
     for (int i = 0; i < candidate_count; i++)
     {
         candidates[i].name = argv[i + 1];
         candidates[i].votes = 0;
     }
 
+    // Get the number of voters from the user
     int voter_count = get_int("Number of voters: ");
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
+        // Prompt user to enter their vote (candidate's name)
         string name = get_string("Vote: ");
 
         // Check for invalid vote
@@ -59,20 +63,48 @@ int main(int argc, string argv[])
         }
     }
 
-    // Display winner of election
+    // Display winner(s) of the election
     print_winner();
 }
 
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    // Search for the candidate with the given name
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // If the candidate is found, increment their vote count and return true to indicate successful ballot
+        if (strcmp(candidates[i].name, name) == 0)
+        {
+            candidates[i].votes++;
+            return true;
+        }
+    }
+
+    // If candidate not found, return false to indicate invalid ballot
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
-    return;
+    int max_votes = 0;
+
+    // Find the maximum number of votes among all candidates
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes > max_votes)
+        {
+            max_votes = candidates[i].votes;
+        }
+    }
+
+    // Print the name of the candidate(s) with maximum votes (potential winner(s))
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == max_votes)
+        {
+            printf("%s\n", candidates[i].name);
+        }
+    }
 }
