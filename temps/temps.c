@@ -1,6 +1,3 @@
-// Practice working with structs
-// Practice applying sorting algorithms
-
 #include <cs50.h>
 #include <stdio.h>
 
@@ -59,8 +56,26 @@ int main(void)
     }
 }
 
-// TODO: Sort cities by temperature in descending order
+// Bubble Sort algorithm to sort cities by temperature in descending order
 void sort_cities(void)
 {
-    // Add your code here
+    for (int i = 0; i < NUM_CITIES - 1; i++)
+    {
+        for (int j = 0; j < NUM_CITIES - i - 1; j++)
+        {
+            // Compare the temperatures and swap the cities if the current temperature is less than the next temperature
+            if (temps[j].temp < temps[j + 1].temp)
+            {
+                // Swap the cities' temperatures
+                int temp_temp = temps[j].temp;
+                temps[j].temp = temps[j + 1].temp;
+                temps[j + 1].temp = temp_temp;
+
+                // Swap the cities' names
+                string temp_city = temps[j].city;
+                temps[j].city = temps[j + 1].city;
+                temps[j + 1].city = temp_city;
+            }
+        }
+    }
 }
