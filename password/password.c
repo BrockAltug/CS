@@ -1,7 +1,7 @@
-#include <stdio.h>
 #include <cs50.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 // method if the password is valid true or false
 bool valid(string password);
@@ -13,12 +13,12 @@ int main(void)
     string password = get_string("Enter your password: ");
 
     // check if the password is valid using the valid function
-    //if the password is valid
+    // if the password is valid
     if (valid(password))
     {
         printf("Your password is valid!\n");
     }
-    //else the password doesnt match the criteria
+    // else the password doesnt match the criteria
     else
     {
         printf("Your password needs at least one uppercase letter, lowercase letter, number, and symbol\n");
@@ -64,10 +64,10 @@ bool valid(string password)
     // check if all criteria are met (has at least one lowercase letter, one uppercase letter, one number, and one symbol)
     if (has_lower && has_upper && has_digit && has_symbol)
     {
-        //return true to valid if it meets criteria
+        // return true to valid if it meets criteria
         return true;
     }
-    //else return false 
+    // else return false
     else
     {
         return false;
