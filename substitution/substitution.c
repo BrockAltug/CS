@@ -1,8 +1,7 @@
-#include <ctype.h>
 #include <cs50.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-
 
 // method to validate the key provided by the user
 bool is_valid_key(string key);
@@ -22,7 +21,7 @@ int main(int argc, string argv[])
 
     // validate the key provided by the user
     string key = argv[1];
-    //if is not valid key
+    // if is not valid key
     if (!is_valid_key(key))
     {
         // print error message and return 1 to signify an error
