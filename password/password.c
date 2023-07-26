@@ -1,6 +1,8 @@
 // Include necessary header files
+#include <stdio.h>
 #include <cs50.h>
 #include <ctype.h>
+#include <stdbool.h> // Add this line to include the necessary header
 
 // Function prototype
 bool valid(string password);
