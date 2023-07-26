@@ -40,18 +40,27 @@ int main(void)
     //printf("\n");
     //-----------------------------------------------------------
     //Method 4
+    //string s = get_string("Before: ");
+    //printf("After:  ");
+    //for (int i = 0, n = strlen(s); i < n; i++)
+    //{
+    //    if (islower(s[i]))
+    //    {
+    //        printf("%c", toupper(s[i]));
+    //    }
+    //    else
+    //    {
+    //        printf("%c", s[i]);
+    //    }
+    //}
+    //printf("\n");
+    //----------------------------------------------------------
+    //Method 5
     string s = get_string("Before: ");
     printf("After:  ");
     for (int i = 0, n = strlen(s); i < n; i++)
     {
-        if (islower(s[i]))
-        {
-            printf("%c", toupper(s[i]));
-        }
-        else
-        {
-            printf("%c", s[i]);
-        }
+        printf("%c", toupper(s[i]));
     }
     printf("\n");
 }
