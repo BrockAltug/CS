@@ -1,6 +1,6 @@
 // in terminal $ code hello.c creates a new file named hello in C
-#include <stdio.h>
 #include <cs50.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -17,13 +17,13 @@ int main(void)
     // answer is of type string and can hold any string within it
     // there are many data types, such as int, bool, char, and many others
     printf("hello, %s\n", answer);
-    //run make hello again in the terminal
-    //then run the updated program
-    //updated way to prompt for 2 answers to 2 questions
-    //create 2 new String variables for firstName and lastName
+    // run make hello again in the terminal
+    // then run the updated program
+    // updated way to prompt for 2 answers to 2 questions
+    // create 2 new String variables for firstName and lastName
     string firstName = get_string("What's your First name? ");
     string lastName = get_string("What's your Last name? ");
-    //add another %s to display user String input
+    // add another %s to display user String input
     printf("hello, %s %s\n", firstName, lastName);
 }
 // in terminal to compile from source code in C to machine code (binary 0s and 1s)

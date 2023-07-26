@@ -4,39 +4,39 @@
 // Different methods to calculate the average of 3 scores
 
 // Method 1: Using individual variables
-//int main(void)
+// int main(void)
 //{
-    // Method 1: Using individual variables
-    // Scores
-    //int score1 = 72;
-    //int score2 = 73;
-    //int score3 = 33;
+// Method 1: Using individual variables
+// Scores
+// int score1 = 72;
+// int score2 = 73;
+// int score3 = 33;
 
-    // Print average
-    //printf("Average: %f\n", (score1 + score2 + score3) / 3.0);
-    //---------------------------------------------------------------------------
+// Print average
+// printf("Average: %f\n", (score1 + score2 + score3) / 3.0);
+//---------------------------------------------------------------------------
 
-    // Method 2: Using an array
-    // Scores
-    //int scores[3];
-    //scores[0] = 72;
-    //scores[1] = 73;
-    //scores[2] = 33;
+// Method 2: Using an array
+// Scores
+// int scores[3];
+// scores[0] = 72;
+// scores[1] = 73;
+// scores[2] = 33;
 
-    // Print average
-    //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
-    //---------------------------------------------------------------------------
+// Print average
+// printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
+//---------------------------------------------------------------------------
 
-    // Method 3: Using a loop to get scores from the user
-    // Get scores
-    //int scores[3];
-    //for (int i = 0; i < 3; i++)
-    //{
-    //    scores[i] = get_int("Score: ");
-    //}
+// Method 3: Using a loop to get scores from the user
+// Get scores
+// int scores[3];
+// for (int i = 0; i < 3; i++)
+//{
+//    scores[i] = get_int("Score: ");
+//}
 
-    // Print average
-    //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
+// Print average
+// printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
 //}
 //---------------------------------------------------------------------------
 

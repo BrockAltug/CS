@@ -31,7 +31,7 @@ int main(void)
     // starting from 0 until 3 times, add 1
     for (int k = 0; k < 3; k++)
     {
-        //will print out meow each time
+        // will print out meow each time
         printf("meow\n");
     }
     // this will print out the text infinitely
