@@ -25,5 +25,24 @@ int main(void)
 
 int convert(string input)
 {
-    // TODO
+    // Base case: if the input string is empty, return 0
+    if (strlen(input) == 0)
+    {
+        return 0;
+    }
+
+    // Get the last character and convert it to an integer
+    char last_char = input[strlen(input) - 1];
+    int last_digit = last_char - '0';
+
+    // Shorten the string, removing the last character
+    input[strlen(input) - 1] = '\0';
+
+    // Recursively call convert using the shortened string as input
+    int remaining_value = convert(input);
+
+    // Calculate the integer value using the recursive result and the last digit
+    int result = remaining_value * 10 + last_digit;
+
+    return result;
 }
