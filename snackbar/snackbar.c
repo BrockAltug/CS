@@ -13,7 +13,7 @@
  * Cold Brew: $3
  * Water: $2
  * Soda: $2
-*/
+ */
 
 #include <cs50.h>
 #include <ctype.h>
@@ -30,8 +30,7 @@ typedef struct
 {
     string item;
     float price;
-}
-menu_item;
+} menu_item;
 
 // array of menu items
 menu_item menu[NUM_ITEMS];
