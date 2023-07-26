@@ -51,8 +51,8 @@ bool valid(string password)
         {
             has_digit = true;
         }
-        // Check if the character is NOT alphanumeric (i.e., a symbol)
-        else if (!isalnum(c))
+        // Check if the character is a symbol (non-alphanumeric)
+        else if (ispunct(c))
         {
             has_symbol = true;
         }
