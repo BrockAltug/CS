@@ -1,33 +1,39 @@
+// Include the cs50 library for get_string() function
 #include <cs50.h>
+// Include the ctype library for character handling functions
 #include <ctype.h>
+// Include the standard input/output library
 #include <stdio.h>
+// Include the string library for string manipulation functions
 #include <string.h>
 
 int main(void)
 {
-    //Method 1
+    // Method 1: Counting characters in a string using a loop
     // Prompt for user's name
-    //string name = get_string("Name: ");
+    // string name = get_string("Name: ");
 
     // Count number of characters up until '\0' (aka NUL)
-    //int n = 0;
-    //while (name[n] != '\0')
-    //{
+    // int n = 0;
+    // while (name[n] != '\0')
+    // {
     //    n++;
-    //}
-    //printf("%i\n", n);
+    // }
+    // printf("%i\n", n);
     //--------------------------------------------------------
-    //Method 2
+
+    // Method 2: Counting characters in a string using strlen()
     // Prompt for user's name
-    //string name = get_string("Name: ");
-    //int length = strlen(name);
-    //printf("%i\n", length);
+    // string name = get_string("Name: ");
+    // int length = strlen(name);
+    // printf("%i\n", length);
     //---------------------------------------------------------
-    //Method 3
-    //string s = get_string("Before: ");
-    //printf("After:  ");
-    //for (int i = 0, n = strlen(s); i < n; i++)
-    //{
+
+    // Method 3: Converting lowercase characters to uppercase
+    // string s = get_string("Before: ");
+    // printf("After:  ");
+    // for (int i = 0, n = strlen(s); i < n; i++)
+    // {
     //    if (s[i] >= 'a' && s[i] <= 'z')
     //    {
     //        printf("%c", s[i] - 32);
@@ -36,14 +42,15 @@ int main(void)
     //    {
     //        printf("%c", s[i]);
     //    }
-    //}
-    //printf("\n");
+    // }
+    // printf("\n");
     //-----------------------------------------------------------
-    //Method 4
-    //string s = get_string("Before: ");
-    //printf("After:  ");
-    //for (int i = 0, n = strlen(s); i < n; i++)
-    //{
+
+    // Method 4: Using islower() and toupper() functions
+    // string s = get_string("Before: ");
+    // printf("After:  ");
+    // for (int i = 0, n = strlen(s); i < n; i++)
+    // {
     //    if (islower(s[i]))
     //    {
     //        printf("%c", toupper(s[i]));
@@ -52,10 +59,11 @@ int main(void)
     //    {
     //        printf("%c", s[i]);
     //    }
-    //}
-    //printf("\n");
+    // }
+    // printf("\n");
     //----------------------------------------------------------
-    //Method 5
+
+    // Method 5: Converting all characters to uppercase
     string s = get_string("Before: ");
     printf("After:  ");
     for (int i = 0, n = strlen(s); i < n; i++)
