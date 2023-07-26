@@ -1,6 +1,4 @@
-// Include the cs50 library for get_int() function
 #include <cs50.h>
-// Include the standard input/output library
 #include <stdio.h>
 
 // Different methods to calculate the average of 3 scores

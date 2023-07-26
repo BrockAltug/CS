@@ -1,6 +1,4 @@
-// Include the cs50 library for string data type and get_string() function
 #include <cs50.h>
-// Include the standard input/output library
 #include <stdio.h>
 
 int main(void)
