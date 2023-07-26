@@ -25,12 +25,18 @@ candidate candidates[MAX_CANDIDATES];
 int voter_count;
 int candidate_count;
 
-// Function prototypes
+// methods
+//boolean for vote using voter, rank, and name
 bool vote(int voter, int rank, string name);
+//void tabulate
 void tabulate(void);
+//boolean to for print_winner
 bool print_winner(void);
+//int variable to find the min
 int find_min(void);
+//boolean to check tie
 bool is_tie(int min);
+//void to eliminate 
 void eliminate(int min);
 
 int main(int argc, string argv[])
