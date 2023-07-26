@@ -3,20 +3,26 @@
 
 int get_negative_int(void);
 
+//main method
 int main(void)
 {
     int i = get_negative_int();
     printf("%i\n", i);
 }
 
-// Prompt user for positive integer
+// method to get negative integer from user
 int get_negative_int(void)
 {
-    int n;
+    //new int variable to store user input
+    int userInput;
+    //do while loop
     do
     {
-        n = get_int("Negative Integer: ");
+        //prompts for user input
+        userInput = get_int("Negative Integer: ");
     }
-    while (n >= 0);
-    return n;
+    //while
+    
+    while (userInput >= 0);
+    return userInput;
 }
