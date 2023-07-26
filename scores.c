@@ -1,8 +1,10 @@
 #include <cs50.h>
 #include <stdio.h>
 
+//different methods to calculate the average of 3 scores
 //int main(void)
 //{
+    //method 1
     // Scores
     //int score1 = 72;
     //int score2 = 73;
@@ -11,6 +13,7 @@
     // Print average
     //printf("Average: %f\n", (score1 + score2 + score3) / 3.0);
     //-------------------------------------------------------------------
+    //method 2
     // Scores
     //int scores[3];
     //scores[0] = 72;
@@ -20,6 +23,7 @@
     // Print average
     //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
     //--------------------------------------------------------------------
+    //method 3
      // Get scores
     //int scores[3];
     //for (int i = 0; i < 3; i++)
@@ -31,6 +35,7 @@
     //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
 //}
 //---------------------------------------------------------------------------
+//method 4
 // Constant
 const int N = 3;
 
