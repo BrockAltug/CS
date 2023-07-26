@@ -1,10 +1,14 @@
+// Include the cs50 library for get_int() function
 #include <cs50.h>
+// Include the standard input/output library
 #include <stdio.h>
 
-//different methods to calculate the average of 3 scores
+// Different methods to calculate the average of 3 scores
+
+// Method 1: Using individual variables
 //int main(void)
 //{
-    //method 1
+    // Method 1: Using individual variables
     // Scores
     //int score1 = 72;
     //int score2 = 73;
@@ -13,7 +17,8 @@
     // Print average
     //printf("Average: %f\n", (score1 + score2 + score3) / 3.0);
     //-------------------------------------------------------------------
-    //method 2
+
+    // Method 2: Using an array
     // Scores
     //int scores[3];
     //scores[0] = 72;
@@ -23,8 +28,9 @@
     // Print average
     //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
     //--------------------------------------------------------------------
-    //method 3
-     // Get scores
+
+    // Method 3: Using a loop to get scores from the user
+    // Get scores
     //int scores[3];
     //for (int i = 0; i < 3; i++)
     //{
@@ -35,7 +41,8 @@
     //printf("Average: %f\n", (scores[0] + scores[1] + scores[2]) / 3.0);
 //}
 //---------------------------------------------------------------------------
-//method 4
+
+// Method 4: Using a separate function to calculate the average
 // Constant
 const int N = 3;
 
@@ -55,6 +62,7 @@ int main(void)
     printf("Average: %f\n", average(N, scores));
 }
 
+// Function to calculate the average of an array of integers
 float average(int length, int array[])
 {
     // Calculate average
