@@ -24,8 +24,30 @@ int main(void)
     printf("%.1f hours\n", calc_hours(hours, weeks, output));
 }
 
-// TODO: complete the calc_hours function
+// Function to calculate either the total hours or the average hours per week
 float calc_hours(int hours[], int weeks, char output)
 {
+    // Calculate the total hours
+    if (output == 'T')
+    {
+        int total_hours = 0;
+        for (int i = 0; i < weeks; i++)
+        {
+            total_hours += hours[i];
+        }
+        return (float)total_hours;
+    }
+    // Calculate the average hours per week
+    else if (output == 'A')
+    {
+        int total_hours = 0;
+        for (int i = 0; i < weeks; i++)
+        {
+            total_hours += hours[i];
+        }
+        return (float)total_hours / weeks;
+    }
 
+    // If the provided 'output' parameter is not 'T' or 'A', return -1 as an error indicator
+    return -1;
 }
