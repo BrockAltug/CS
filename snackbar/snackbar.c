@@ -21,11 +21,11 @@
 #include <string.h>
 #include <strings.h>
 
-// Number of menu items
-// Adjust this value (10) to number of items input below
+// number of menu items
+// adjust this value (10) to number of items input below
 #define NUM_ITEMS 10
 
-// Menu items have item name and price
+// menu items have item name and price
 typedef struct
 {
     string item;
@@ -33,24 +33,24 @@ typedef struct
 }
 menu_item;
 
-// Array of menu items
+// array of menu items
 menu_item menu[NUM_ITEMS];
 
-// Add items to menu
+// add items to menu
 void add_items(void);
 
-// Calculate total cost
+// calculate total cost
 float get_cost(string item);
 
 int main(void)
 {
-    // Initialize the menu array
+    // initialize the menu array
     add_items();
 
     printf("\nWelcome to Beach Burger Shack!\n");
     printf("Choose from the following menu to order. Press enter when done.\n\n");
 
-    // Print the menu with item names and prices
+    // print the menu with item names and prices
     for (int i = 0; i < NUM_ITEMS; i++)
     {
         printf("%s: $%.2f\n", menu[i].item, menu[i].price);
@@ -60,24 +60,24 @@ int main(void)
     float total = 0;
     while (true)
     {
-        // Prompt the user to enter a food item
+        // prompt the user to enter a food item
         string item = get_string("Enter a food item: ");
-        // If the user presses enter without entering an item, break out of the loop
+        // if the user presses enter without entering an item, break out of the loop
         if (strlen(item) == 0)
         {
             printf("\n");
             break;
         }
 
-        // Calculate the total cost by finding the cost of the entered item
+        // calculate the total cost by finding the cost of the entered item
         total += get_cost(item);
     }
 
-    // Print the total cost of the selected items
+    // print the total cost of the selected items
     printf("Your total cost is: $%.2f\n", total);
 }
 
-// Add at least the first four items to the menu array
+// add at least the first four items to the menu array
 void add_items(void)
 {
     // TODO: Add more items to the menu array
@@ -94,16 +94,16 @@ void add_items(void)
     menu[3].price = 7.00;
 }
 
-// Search through the menu array to find an item's cost
+// search through the menu array to find an item's cost
 float get_cost(string item)
 {
-    // Iterate through the menu array
+    // iterate through the menu array
     for (int i = 0; i < NUM_ITEMS; i++)
     {
-        // Make the search case-insensitive by using strcasecmp
+        // make the search case-insensitive by using strcasecmp
         if (strcasecmp(menu[i].item, item) == 0)
         {
-            // Return the price of the matching item
+            // return the price of the matching item
             return menu[i].price;
         }
     }
