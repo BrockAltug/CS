@@ -1,5 +1,3 @@
-// Copies a BMP file
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -52,6 +50,9 @@ int main(int argc, char *argv[])
         printf("Unsupported file format.\n");
         return 4;
     }
+
+    // Modify the biHeight to a negative value to make the image top-down
+    bi.biHeight = -bi.biHeight;
 
     // Write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
