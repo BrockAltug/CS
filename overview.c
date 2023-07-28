@@ -61,3 +61,27 @@
 // The basic building-blocks of cryptography.
 //-----------------------------------------------------------------------------
 // Week 3
+// learned about algorithmic thinking and building your own data types. Specifically, you learned…
+// Algorithms.
+// Big O notation.
+// Binary search and linear search.
+// Various sort algorithms, including bubble sort, selection sort, and merge sort.
+// Recursion.
+//-----------------------------------------------------------------------------
+// Week 4
+// learned about pointers that provide you with the ability to access and manipulate data at specific memory locations. Specifically, we delved into…
+// Memory
+// Hexadecimal
+// Addresses
+// Pointers
+// Strings
+// Pointer Arithmetic
+// Comparing strings
+// Copying
+// Valgrind
+// Garbage values
+// Swap
+// Overflow
+// scanf
+//-----------------------------------------------------------------------------
+// Week 5
