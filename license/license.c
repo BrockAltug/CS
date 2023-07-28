@@ -1,36 +1,59 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
     // Check for command line args
     if (argc != 2)
     {
-        printf("Usage: ./read infile\n");
+        printf("Usage: ./license infile\n");
         return 1;
     }
 
     // Create buffer to read into
-    char buffer[7];
+    char buffer[8]; // Change the size to 8 to accommodate NUL terminator
 
     // Create array to store plate numbers
     char *plates[8];
 
     FILE *infile = fopen(argv[1], "r");
 
+    if (infile == NULL)
+    {
+        printf("Error opening the file.\n");
+        return 1;
+    }
+
     int idx = 0;
 
-    while (fread(buffer, 1, 7, infile) == 7)
+    // Read each line from the file and store the plate numbers in the array
+    while (fgets(buffer, sizeof(buffer), infile))
     {
-        // Replace '\n' with '\0'
-        buffer[6] = '\0';
+        // Remove the trailing newline character
+        buffer[strcspn(buffer, "\n")] = '\0';
 
-        // Save plate number in array
-        plates[idx] = buffer;
+        // Allocate memory for the plate number
+        plates[idx] = (char *)malloc(strlen(buffer) + 1);
+
+        if (plates[idx] == NULL)
+        {
+            printf("Memory allocation failed.\n");
+            return 1;
+        }
+
+        // Copy the plate number into the allocated memory
+        strcpy(plates[idx], buffer);
         idx++;
     }
 
-    for (int i = 0; i < 8; i++)
+    fclose(infile);
+
+    for (int i = 0; i < idx; i++)
     {
         printf("%s\n", plates[i]);
+        free(plates[i]); // Free the allocated memory
     }
+
+    return 0;
 }
