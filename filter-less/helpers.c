@@ -72,6 +72,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE tempImage[height][width];
+
     // Make a copy of the original image
     for (int i = 0; i < height; i++)
     {
@@ -86,14 +87,32 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            // Define the surrounding pixels for averaging (including the current one)
-            RGBTRIPLE pixel1 = (i > 0) ? tempImage[i - 1][j] : tempImage[i][j];
-            RGBTRIPLE pixel2 = (j > 0) ? tempImage[i][j - 1] : tempImage[i][j];
-            RGBTRIPLE pixel3 = (i < height - 1) ? tempImage[i + 1][j] : tempImage[i][j];
-            RGBTRIPLE pixel4 = (j < width - 1) ? tempImage[i][j + 1] : tempImage[i][j];
+            int totalRed = 0, totalGreen = 0, totalBlue = 0;
+            int count = 0;
+
+            // Calculate the average of RGB values from surrounding pixels and the current pixel
+            for (int k = -1; k <= 1; k++)
+            {
+                for (int m = -1; m <= 1; m++)
+                {
+                    int row = i + k;
+                    int col = j + m;
+
+                    if (row >= 0 && row < height && col >= 0 && col < width)
+                    {
+                        totalRed += tempImage[row][col].rgbtRed;
+                        totalGreen += tempImage[row][col].rgbtGreen;
+                        totalBlue += tempImage[row][col].rgbtBlue;
+                        count++;
+                    }
+                }
+            }
 
             // Calculate the average of RGB values and update the original pixel
-            image[i][j] = getAverageRGB(pixel1, pixel2, pixel3, pixel4);
+            image[i][j].rgbtRed = round((float)totalRed / count);
+            image[i][j].rgbtGreen = round((float)totalGreen / count);
+            image[i][j].rgbtBlue = round((float)totalBlue / count);
         }
     }
 }
+
