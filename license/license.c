@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         buffer[strcspn(buffer, "\n")] = '\0';
 
         // Allocate memory for the plate number
-        plates[idx] = (char *)malloc(strlen(buffer) + 1);
+        plates[idx] = (char *) malloc(strlen(buffer) + 1);
 
         if (plates[idx] == NULL)
         {
