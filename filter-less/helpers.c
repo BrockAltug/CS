@@ -1,7 +1,7 @@
 #include "helpers.h"
 #include <math.h>
 
-// Function to calculate the average of RGB values
+// method to calculate the average of RGB values
 RGBTRIPLE getAverageRGB(RGBTRIPLE pixel1, RGBTRIPLE pixel2, RGBTRIPLE pixel3, RGBTRIPLE pixel4)
 {
     int totalRed = pixel1.rgbtRed + pixel2.rgbtRed + pixel3.rgbtRed + pixel4.rgbtRed;
@@ -9,14 +9,14 @@ RGBTRIPLE getAverageRGB(RGBTRIPLE pixel1, RGBTRIPLE pixel2, RGBTRIPLE pixel3, RG
     int totalBlue = pixel1.rgbtBlue + pixel2.rgbtBlue + pixel3.rgbtBlue + pixel4.rgbtBlue;
 
     RGBTRIPLE averagePixel;
-    averagePixel.rgbtRed = round((float)totalRed / 4);
-    averagePixel.rgbtGreen = round((float)totalGreen / 4);
-    averagePixel.rgbtBlue = round((float)totalBlue / 4);
+    averagePixel.rgbtRed = round((float) totalRed / 4);
+    averagePixel.rgbtGreen = round((float) totalGreen / 4);
+    averagePixel.rgbtBlue = round((float) totalBlue / 4);
 
     return averagePixel;
 }
 
-// Convert image to grayscale
+// convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int i = 0; i < height; i++)
@@ -24,15 +24,15 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             RGBTRIPLE pixel = image[i][j];
-            // Calculate the average of red, green, and blue values
+            // calculate the average of red, green, and blue values
             int average = round((pixel.rgbtRed + pixel.rgbtGreen + pixel.rgbtBlue) / 3.0);
-            // Set all RGB values to the calculated average
+            // set all RGB values to the calculated average
             image[i][j].rgbtRed = image[i][j].rgbtGreen = image[i][j].rgbtBlue = average;
         }
     }
 }
 
-// Convert image to sepia
+// convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int i = 0; i < height; i++)
@@ -40,12 +40,12 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             RGBTRIPLE pixel = image[i][j];
-            // Calculate new RGB values using sepia formulas
+            // calculate new RGB values using sepia formulas
             int sepiaRed = round(0.393 * pixel.rgbtRed + 0.769 * pixel.rgbtGreen + 0.189 * pixel.rgbtBlue);
             int sepiaGreen = round(0.349 * pixel.rgbtRed + 0.686 * pixel.rgbtGreen + 0.168 * pixel.rgbtBlue);
             int sepiaBlue = round(0.272 * pixel.rgbtRed + 0.534 * pixel.rgbtGreen + 0.131 * pixel.rgbtBlue);
 
-            // Cap values at 255
+            // cap all values at 255
             image[i][j].rgbtRed = (sepiaRed > 255) ? 255 : sepiaRed;
             image[i][j].rgbtGreen = (sepiaGreen > 255) ? 255 : sepiaGreen;
             image[i][j].rgbtBlue = (sepiaBlue > 255) ? 255 : sepiaBlue;
@@ -53,14 +53,14 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-// Reflect image horizontally
+// reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width / 2; j++)
         {
-            // Swap pixels from left to right to reflect horizontally
+            // swap pixels from left to right to reflect horizontally
             RGBTRIPLE temp = image[i][j];
             image[i][j] = image[i][width - 1 - j];
             image[i][width - 1 - j] = temp;
@@ -68,12 +68,12 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-// Blur image
+// blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE tempImage[height][width];
 
-    // Make a copy of the original image
+    // make a copy of the original image
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -82,7 +82,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
     }
 
-    // Apply blur effect to the original image using averages from the temporary image
+    // apply blur effect to the original image using averages from the temporary image
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -90,7 +90,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int totalRed = 0, totalGreen = 0, totalBlue = 0;
             int count = 0;
 
-            // Calculate the average of RGB values from surrounding pixels and the current pixel
+            // calculate the average of RGB values from surrounding pixels and the current pixel
             for (int k = -1; k <= 1; k++)
             {
                 for (int m = -1; m <= 1; m++)
@@ -108,11 +108,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            // Calculate the average of RGB values and update the original pixel
-            image[i][j].rgbtRed = round((float)totalRed / count);
-            image[i][j].rgbtGreen = round((float)totalGreen / count);
-            image[i][j].rgbtBlue = round((float)totalBlue / count);
+            // calculate the average of RGB values and update the original pixel
+            image[i][j].rgbtRed = round((float) totalRed / count);
+            image[i][j].rgbtGreen = round((float) totalGreen / count);
+            image[i][j].rgbtBlue = round((float) totalBlue / count);
         }
     }
 }
-
