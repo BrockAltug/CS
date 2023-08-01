@@ -6,11 +6,6 @@
 
 typedef uint8_t BYTE;
 
-typedef struct {
-    char filename[8];
-    FILE *fp;
-} JPEGFile;
-
 int main(int argc, char *argv[]) {
     // Check command-line arguments
     if (argc != 2) {
@@ -25,50 +20,44 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // Initialize variables for JPEG recovery
+    BYTE buffer[BLOCK_SIZE];
     int jpeg_counter = 0;
-    JPEGFile *jpeg_files = NULL;
+    FILE *jpeg_file = NULL;
+    char filename[8];
 
-    BYTE block[BLOCK_SIZE];
-    while (fread(block, 1, BLOCK_SIZE, forensic_image) == BLOCK_SIZE) {
-        // Check for JPEG signatures
-        if (block[0] == 0xff && block[1] == 0xd8 && block[2] == 0xff && (block[3] & 0xf0) == 0xe0) {
-            // Close the previous file (if any)
-            if (jpeg_counter > 0) {
-                fclose(jpeg_files[jpeg_counter - 1].fp);
+    // Read the forensic image block by block
+    while (fread(buffer, sizeof(BYTE), BLOCK_SIZE, forensic_image) == BLOCK_SIZE) {
+        // Check for the start of a new JPEG
+        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) {
+            // Close the previous JPEG file (if any)
+            if (jpeg_file != NULL) {
+                fclose(jpeg_file);
             }
 
-            // Create a new JPEG file
-            snprintf(jpeg_files[jpeg_counter].filename, sizeof(jpeg_files[jpeg_counter].filename), "%03d.jpg", jpeg_counter);
-            jpeg_files[jpeg_counter].fp = fopen(jpeg_files[jpeg_counter].filename, "w");
-            if (jpeg_files[jpeg_counter].fp == NULL) {
+            // Create a new JPEG file with the appropriate filename
+            snprintf(filename, sizeof(filename), "%03d.jpg", jpeg_counter);
+            jpeg_file = fopen(filename, "w");
+            if (jpeg_file == NULL) {
                 printf("Could not create the output JPEG file.\n");
                 fclose(forensic_image);
-                free(jpeg_files);
                 return 1;
             }
 
+            // Increment the JPEG counter
             jpeg_counter++;
-            jpeg_files = realloc(jpeg_files, jpeg_counter * sizeof(JPEGFile));
-            if (jpeg_files == NULL) {
-                printf("Memory allocation failed.\n");
-                fclose(forensic_image);
-                return 1;
-            }
         }
 
-        // Write the block to the current JPEG file
-        if (jpeg_counter > 0) {
-            fwrite(block, 1, BLOCK_SIZE, jpeg_files[jpeg_counter - 1].fp);
+        // Write the block to the current JPEG file (if it exists)
+        if (jpeg_file != NULL) {
+            fwrite(buffer, sizeof(BYTE), BLOCK_SIZE, jpeg_file);
         }
     }
 
     // Close the last JPEG file (if any)
-    if (jpeg_counter > 0) {
-        fclose(jpeg_files[jpeg_counter - 1].fp);
+    if (jpeg_file != NULL) {
+        fclose(jpeg_file);
     }
-
-    // Free allocated memory
-    free(jpeg_files);
 
     // Close the forensic image
     fclose(forensic_image);
