@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #define BLOCK_SIZE 512
+
+typedef uint8_t BYTE;
 
 typedef struct {
     char filename[8];
@@ -25,8 +28,8 @@ int main(int argc, char *argv[]) {
     int jpeg_counter = 0;
     JPEGFile *jpeg_files = NULL;
 
-    unsigned char block[BLOCK_SIZE];
-    while (fread(block, BLOCK_SIZE, 1, forensic_image)) {
+    BYTE block[BLOCK_SIZE];
+    while (fread(block, 1, BLOCK_SIZE, forensic_image) == BLOCK_SIZE) {
         // Check for JPEG signatures
         if (block[0] == 0xff && block[1] == 0xd8 && block[2] == 0xff && (block[3] & 0xf0) == 0xe0) {
             // Close the previous file (if any)
@@ -55,7 +58,7 @@ int main(int argc, char *argv[]) {
 
         // Write the block to the current JPEG file
         if (jpeg_counter > 0) {
-            fwrite(block, BLOCK_SIZE, 1, jpeg_files[jpeg_counter - 1].fp);
+            fwrite(block, 1, BLOCK_SIZE, jpeg_files[jpeg_counter - 1].fp);
         }
     }
 
