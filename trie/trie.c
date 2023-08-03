@@ -12,8 +12,7 @@ typedef struct node
 {
     bool is_word;
     struct node *children[SIZE_OF_ALPHABET];
-}
-node;
+} node;
 
 // Function prototypes
 bool check(char *word);
@@ -107,7 +106,7 @@ int main(int argc, char *argv[])
     fclose(infile);
 }
 
-bool check(char* word)
+bool check(char *word)
 {
     node *cursor = root;
 
@@ -131,7 +130,7 @@ bool unload(void)
     return true;
 }
 
-void unloader(node* current)
+void unloader(node *current)
 {
     for (int i = 0; i < SIZE_OF_ALPHABET; i++)
     {
