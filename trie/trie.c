@@ -1,6 +1,3 @@
-// Saves popular dog names in a trie
-// https://www.dailypaws.com/dogs-puppies/dog-names/common-dog-names
-
 #include <cs50.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -61,7 +58,7 @@ int main(int argc, char *argv[])
     }
 
     // Add words to the trie
-    while (fscanf(infile, "%s", name) == 1) 
+    while (fscanf(infile, "%s", name) == 1)
     {
         node *cursor = root;
 
@@ -70,7 +67,6 @@ int main(int argc, char *argv[])
             int index = tolower(name[i]) - 'a';
             if (cursor->children[index] == NULL)
             {
-
                 // Make node
                 node *new = malloc(sizeof(node));
                 new->is_word = false;
@@ -89,7 +85,11 @@ int main(int argc, char *argv[])
         cursor->is_word = true;
     }
 
-    if (check(get_string("Check word: ")))
+    char word[MAXCHAR];
+    printf("Check word: ");
+    scanf("%s", word);
+
+    if (check(word))
     {
         printf("Found!\n");
     }
@@ -107,27 +107,32 @@ int main(int argc, char *argv[])
     fclose(infile);
 }
 
-// TODO: Complete the check function, return true if found, false if not found
 bool check(char* word)
 {
-    return false;
+    node *cursor = root;
+
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        int index = tolower(word[i]) - 'a';
+        if (cursor->children[index] == NULL)
+        {
+            return false;
+        }
+
+        cursor = cursor->children[index];
+    }
+
+    return cursor->is_word;
 }
 
-// Unload trie from memory
 bool unload(void)
 {
-
-    // The recursive function handles all of the freeing
     unloader(root);
-
     return true;
 }
 
 void unloader(node* current)
 {
-    
-    // Iterate over all the children to see if they point to anything and go
-    // there if they do point
     for (int i = 0; i < SIZE_OF_ALPHABET; i++)
     {
         if (current->children[i] != NULL)
@@ -136,7 +141,5 @@ void unloader(node* current)
         }
     }
 
-    // After we check all the children point to null we can get rid of the node
-    // and return to the previous iteration of this function.
     free(current);
 }
