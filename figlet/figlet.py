@@ -1,38 +1,26 @@
 import sys
+import pyfiglet
 
-def print_figlet_text(font, text):
-    if font == "slant":
-        print("   ___________ __________ ")
-        print("  / ____/ ___// ____/ __ \\")
-        print(" / /    \\__ \\/___ \\/ / / /")
-        print("/ /___ ___/ /___/ / /_/ / ")
-        print("\\____//____/_____/\____/  ")
-    elif font == "rectangles":
-        print(" _____     _ _                        _   _ ")
-        print("|  |  |___| | |___      _ _ _ ___ ___| |_| |")
-        print("|     | -_| | | . |_   | | | | . |  _| | . |")
-        print("|__|__|___|_|_|___| |  |_____|___|_| |_|___|")
-        print("                  |_|                       ")
-    elif font == "alphabet":
-        print("M   M         ")
-        print("MM MM         ")
-        print("M M M ooo ooo ")
-        print("M   M o o o o ")
-        print("M   M ooo ooo ")
+def print_usage_and_exit():
+    print("Invalid usage")
+    sys.exit(1)
 
 def main():
-    if len(sys.argv) != 3:
-        print("Invalid usage")
-        sys.exit(1)
-
-    arg = sys.argv[1]
-    font = sys.argv[2]
-
-    if arg == "-f":
-        text = input("Type your text: ")
-        print_figlet_text(font, text)
+    if len(sys.argv) == 1:
+        font_name = None
+    elif len(sys.argv) == 3 and (sys.argv[1] == "-f" or sys.argv[1] == "--font"):
+        font_name = sys.argv[2]
     else:
-        print("Invalid usage")
+        print_usage_and_exit()
+
+    if font_name:
+        text = input("Type your text: ")
+        figlet = pyfiglet.Figlet(font=font_name)
+    else:
+        text = pyfiglet.Figlet.getFonts()[0]
+        figlet = pyfiglet.Figlet(font=text)
+
+    print(figlet.renderText(text))
 
 if __name__ == "__main__":
     main()
