@@ -1,19 +1,12 @@
 import sys
 import pyfiglet
 
-def print_usage_and_exit():
-    print("Invalid usage")
-    sys.exit(1)
-
 def main():
     if len(sys.argv) == 1:
-        font_name = None
+        fonts = pyfiglet.Figlet.getFonts()
+        print("Available fonts:", ", ".join(fonts))
     elif len(sys.argv) == 3 and (sys.argv[1] == "-f" or sys.argv[1] == "--font"):
         font_name = sys.argv[2]
-    else:
-        print_usage_and_exit()
-
-    if font_name:
         text = input("Type your text: ")
         try:
             figlet = pyfiglet.Figlet(font=font_name)
@@ -22,8 +15,8 @@ def main():
             print("Invalid font name")
             sys.exit(1)
     else:
-        fonts = pyfiglet.Figlet.getFonts()
-        print("Available fonts:", ", ".join(fonts))
+        print("Invalid usage")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
