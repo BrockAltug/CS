@@ -1,6 +1,7 @@
 import csv
 import requests
 
+# Define the main function
 def main():
     # Read NYTimes Covid Database
     download = requests.get(
@@ -10,7 +11,7 @@ def main():
     file = decoded_content.splitlines()
     reader = csv.DictReader(file)
 
-    # Construct 14 day lists of new cases for each states
+    # Construct 14 day lists of new cases for each state
     new_cases = calculate(reader)
 
     # Create a list to store selected states
@@ -19,6 +20,7 @@ def main():
     print("Press enter when done.\n")
 
     while True:
+        # Get user input for state selection
         state = input("State: ")
         if state in new_cases:
             states.append(state)
@@ -30,7 +32,7 @@ def main():
     # Print out 7-day averages for this week vs last week
     comparative_averages(new_cases, states)
 
-# TODO: Create a dictionary to store 14 most recent days of new cases by state
+# Create a dictionary to store 14 most recent days of new cases by state
 def calculate(reader):
     new_cases = {}
     for row in reader:
@@ -47,7 +49,7 @@ def calculate(reader):
             new_cases[state].append(cases)
     return new_cases
 
-# TODO: Calculate and print out seven day average for given state
+# Calculate and print out seven day average for given state
 def comparative_averages(new_cases, states):
     for state in states:
         cases = new_cases[state]
@@ -61,4 +63,5 @@ def comparative_averages(new_cases, states):
 
         print(f"{state} had a 7-day average of {int(current_week)} and a change of {int(percent_change)}%.")
 
+# Call the main function to start the program
 main()
