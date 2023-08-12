@@ -1,9 +1,5 @@
 import sys
 
-def print_invalid_usage():
-    print("Invalid usage")
-    sys.exit(1)
-
 def print_figlet_text(font, text):
     if font == "slant":
         print("   ___________ __________ ")
@@ -25,24 +21,18 @@ def print_figlet_text(font, text):
         print("M   M ooo ooo ")
 
 def main():
-    if len(sys.argv) == 1:
-        print_invalid_usage()
+    if len(sys.argv) != 3:
+        print("Invalid usage")
+        sys.exit(1)
 
     arg = sys.argv[1]
+    font = sys.argv[2]
 
-    if arg == "test" or arg == "-a" or arg == "-f":
-        if arg == "test":
-            print_invalid_usage()
-        elif arg == "-a":
-            print_invalid_usage()
-        elif arg == "-f":
-            if len(sys.argv) != 3:
-                print_invalid_usage()
-            font = sys.argv[2]
-            text = input("Type your text: ")
-            print_figlet_text(font, text)
+    if arg == "-f":
+        text = input("Type your text: ")
+        print_figlet_text(font, text)
     else:
-        print_invalid_usage()
+        print("Invalid usage")
 
 if __name__ == "__main__":
     main()
