@@ -15,12 +15,15 @@ def main():
 
     if font_name:
         text = input("Type your text: ")
-        figlet = pyfiglet.Figlet(font=font_name)
+        try:
+            figlet = pyfiglet.Figlet(font=font_name)
+            print(figlet.renderText(text))
+        except pyfiglet.FontNotFound:
+            print("Invalid font name")
+            sys.exit(1)
     else:
-        text = pyfiglet.Figlet.getFonts()[0]
-        figlet = pyfiglet.Figlet(font=text)
-
-    print(figlet.renderText(text))
+        fonts = pyfiglet.Figlet.getFonts()
+        print("Available fonts:", ", ".join(fonts))
 
 if __name__ == "__main__":
     main()
