@@ -40,3 +40,50 @@ elif x > y:
     print("x is greater than y")
 else:
     print("x is equal to y")
+
+#Code written in C
+#// Logical operators
+#
+#include <cs50.h>
+#include <stdio.h>
+#
+#int main(void)
+#{
+#    // Prompt user to agree
+#    char c = get_char("Do you agree? ");
+#
+#    // Check whether agreed
+#    if (c == 'Y' || c == 'y')
+#    {
+#        printf("Agreed.\n");
+#    }
+#    else if (c == 'N' || c == 'n')
+#    {
+#        printf("Not agreed.\n");
+#    }
+#}
+#Same thing written in Python
+# Logical operators
+#
+#from cs50 import get_string
+#
+# Prompt user to agree
+#s = get_string("Do you agree? ")
+#
+# Check whether agreed
+#if s == "Y" or s == "y":
+#    print("Agreed.")
+#elif s == "N" or s == "n":
+#    print("Not agreed.")
+# Logical operators, using lists
+
+from cs50 import get_string
+
+# Prompt user to agree
+s = get_string("Do you agree? ")
+
+# Check whether agreed
+if s in ["y", "yes"]:
+    print("Agreed.")
+elif s in ["n", "no"]:
+    print("Not agreed.")
