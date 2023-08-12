@@ -1,6 +1,7 @@
 import csv
 import requests
 
+
 # Define the main function
 def main():
     # Read NYTimes Covid Database
@@ -32,6 +33,7 @@ def main():
     # Print out 7-day averages for this week vs last week
     comparative_averages(new_cases, states)
 
+
 # Create a dictionary to store 14 most recent days of new cases by state
 def calculate(reader):
     new_cases = {}
@@ -49,6 +51,7 @@ def calculate(reader):
             new_cases[state].append(cases)
     return new_cases
 
+
 # Calculate and print out seven day average for given state
 def comparative_averages(new_cases, states):
     for state in states:
@@ -61,7 +64,10 @@ def comparative_averages(new_cases, states):
         except ZeroDivisionError:
             percent_change = 0
 
-        print(f"{state} had a 7-day average of {int(current_week)} and a change of {int(percent_change)}%.")
+        print(
+            f"{state} had a 7-day average of {int(current_week)} and a change of {int(percent_change)}%."
+        )
+
 
 # Call the main function to start the program
 main()
