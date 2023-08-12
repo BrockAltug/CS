@@ -6,6 +6,7 @@ def main():
     # generate and print the half-pyramids with the provided height
     print_pyramids(height)
 
+
 # method to get a valid height input from the user
 def get_height():
     while True:
@@ -21,6 +22,7 @@ def get_height():
         except ValueError:
             print("Invalid input. Please enter a positive integer.")
 
+
 # method to print the half-pyramids based on the provided height
 def print_pyramids(height):
     for i in range(1, height + 1):
@@ -30,6 +32,7 @@ def print_pyramids(height):
 
         # print the current row with appropriate formatting
         print(f"{spaces}{hashes}  {hashes}")
+
 
 # check if the script is being run as the main program
 if __name__ == "__main__":
