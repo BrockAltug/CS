@@ -11,7 +11,7 @@ def main():
     file = decoded_content.splitlines()
     reader = csv.DictReader(file)
 
-    # Construct 14 day lists of new cases for each states
+    # Construct 14 day lists of new cases for each state
     new_cases = calculate(reader)
 
     # Create a list to store selected states
@@ -32,14 +32,42 @@ def main():
     comparative_averages(new_cases, states)
 
 
-# TODO: Create a dictionary to store 14 most recent days of new cases by state
+# Calculate 14-day lists of new cases for each state
 def calculate(reader):
-    ...
+    new_cases = {}
+    previous_cases = {}
+
+    for row in reader:
+        state = row["state"]
+        cases = int(row["cases"])
+
+        if state not in previous_cases:
+            previous_cases[state] = cases
+            new_cases[state] = []
+        else:
+            new_cases[state].append(cases - previous_cases[state])
+            previous_cases[state] = cases
+
+    return new_cases
 
 
-# TODO: Calculate and print out seven day average for given state
+# Calculate and print out seven-day average for given state
 def comparative_averages(new_cases, states):
-    ...
+    for state in states:
+        cases = new_cases[state]
+        this_week_average = sum(cases[-7:]) / 7
+        last_week_average = sum(cases[:-7]) / 7
+
+        try:
+            percent_change = (
+                (this_week_average - last_week_average) / last_week_average
+            ) * 100
+        except ZeroDivisionError:
+            percent_change = 0
+
+        print(
+            f"{state} had a 7-day average of {int(this_week_average)} and a change of {int(percent_change)}%."
+        )
 
 
 main()
