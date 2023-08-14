@@ -1,130 +1,138 @@
+#----------------------------------------------------
+print("----------------------------------------------")
 # Prints all favorites in CSV using csv.reader
 
-#import csv
+import csv
 
 # Open CSV file
-#with open("favorites.csv", "r") as file:
-#
+with open("favorites.csv", "r") as file:
+
     # Create reader
-#    reader = csv.reader(file)
-#
+    reader = csv.reader(file)
+
     # Skip header row
-#    next(reader)
-#
+    next(reader)
+
     # Iterate over CSV file, printing each favorite
-#    for row in reader:
-#        print(row[1])
-#----------------------------------------------------------
+    for row in reader:
+        print(row[1])
+#----------------------------------------------------
+print("----------------------------------------------")
 # Stores favorite in a variable
 
-#import csv
-#
+import csv
+
 # Open CSV file
-#with open("favorites.csv", "r") as file:
-#
+with open("favorites.csv", "r") as file:
+
     # Create reader
-#    reader = csv.reader(file)
-#
+    reader = csv.reader(file)
+
     # Skip header row
-#    next(reader)
-#
+    next(reader)
+
     # Iterate over CSV file, printing each favorite
-#    for row in reader:
-#        favorite = row[1]
-#        print(favorite)
-#---------------------------------------------------------------
+    for row in reader:
+        favorite = row[1]
+        print(favorite)
+#----------------------------------------------------
+print("----------------------------------------------")
 # Prints all favorites in CSV using csv.DictReader
 
-#import csv
+import csv
 
 # Open CSV file
-#with open("favorites.csv", "r") as file:
-#
+with open("favorites.csv", "r") as file:
+
     # Create DictReader
-#    reader = csv.DictReader(file)
-#
+    reader = csv.DictReader(file)
+
     # Iterate over CSV file, printing each favorite
-#    for row in reader:
-#        print(row["language"])
-#--------------------------------------------------------------
+    for row in reader:
+        print(row["language"])
+#----------------------------------------------------
+print("----------------------------------------------")
 # Counts favorites using variables
 
-#import csv
+import csv
 
 # Open CSV file
-#with open("favorites.csv", "r") as file:
+with open("favorites.csv", "r") as file:
 
     # Create DictReader
-#    reader = csv.DictReader(file)
+    reader = csv.DictReader(file)
 
     # Counts
-#    scratch, c, python = 0, 0, 0
+    scratch, c, python = 0, 0, 0
 
     # Iterate over CSV file, counting favorites
-#    for row in reader:
-#        favorite = row["language"]
-#        if favorite == "Scratch":
-#            scratch += 1
-#        elif favorite == "C":
-#            c += 1
-#        elif favorite == "Python":
-#            python += 1
+    for row in reader:
+        favorite = row["language"]
+        if favorite == "Scratch":
+            scratch += 1
+        elif favorite == "C":
+            c += 1
+        elif favorite == "Python":
+            python += 1
 
 # Print counts
-#print(f"Scratch: {scratch}")
-#print(f"C: {c}")
-#print(f"Python: {python}")
-#---------------------------------------------------------------
+print(f"Scratch: {scratch}")
+print(f"C: {c}")
+print(f"Python: {python}")
+#----------------------------------------------------
+print("----------------------------------------------")
 # Counts favorites using dictionary
 
-#import csv
+import csv
 
 # Open CSV file
-#with open("favorites.csv", "r") as file:
+with open("favorites.csv", "r") as file:
 
     # Create DictReader
-#    reader = csv.DictReader(file)
+    reader = csv.DictReader(file)
 
     # Counts
-#    counts = {}
+    counts = {}
 
     # Iterate over CSV file, counting favorites
-#    for row in reader:
-#        favorite = row["language"]
-#        if favorite in counts:
-#            counts[favorite] += 1
-#        else:
-#            counts[favorite] = 1
+    for row in reader:
+        favorite = row["language"]
+        if favorite in counts:
+            counts[favorite] += 1
+        else:
+            counts[favorite] = 1
 
 # Print counts
-#for favorite in counts:
-#    print(f"{favorite}: {counts[favorite]}")
-#--------------------------------------------------------------
+for favorite in counts:
+    print(f"{favorite}: {counts[favorite]}")
+#----------------------------------------------------
+print("----------------------------------------------")
 # Sorts favorites by key
 
-#import csv
+import csv
 
 # Open CSV file
-#with open("favorites.csv", "r") as file:
+with open("favorites.csv", "r") as file:
 
     # Create DictReader
-#    reader = csv.DictReader(file)
+    reader = csv.DictReader(file)
 
     # Counts
-#    counts = {}
+    counts = {}
 
     # Iterate over CSV file, counting favorites
-#    for row in reader:
-#        favorite = row["language"]
-#        if favorite in counts:
-#            counts[favorite] += 1
-#        else:
-#            counts[favorite] = 1
+    for row in reader:
+        favorite = row["language"]
+        if favorite in counts:
+            counts[favorite] += 1
+        else:
+            counts[favorite] = 1
 
 # Print counts
-#for favorite in sorted(counts):
-#    print(f"{favorite}: {counts[favorite]}")
-#--------------------------------------------------------------------
+for favorite in sorted(counts):
+    print(f"{favorite}: {counts[favorite]}")
+    #----------------------------------------------------
+print("----------------------------------------------")
 # Sorts favorites by value
 
 import csv
@@ -151,4 +159,83 @@ def get_value(language):
 
 # Print counts
 for favorite in sorted(counts, key=get_value, reverse=True):
+    print(f"{favorite}: {counts[favorite]}")
+#----------------------------------------------------
+print("----------------------------------------------")
+# Sorts favorites by value using lambda function
+
+import csv
+
+# Open CSV file
+with open("favorites.csv", "r") as file:
+
+    # Create DictReader
+    reader = csv.DictReader(file)
+
+    # Counts
+    counts = {}
+
+    # Iterate over CSV file, counting favorites
+    for row in reader:
+        favorite = row["language"]
+        if favorite in counts:
+            counts[favorite] += 1
+        else:
+            counts[favorite] = 1
+
+# Print counts
+for favorite in sorted(counts, key=lambda language: counts[language], reverse=True):
+    print(f"{favorite}: {counts[favorite]}")
+#----------------------------------------------------
+print("----------------------------------------------")
+# Favorite problem instead of favorite language
+
+import csv
+
+# Open CSV file
+with open("favorites.csv", "r") as file:
+
+    # Create DictReader
+    reader = csv.DictReader(file)
+
+    # Counts
+    counts = {}
+
+    # Iterate over CSV file, counting favorites
+    for row in reader:
+        favorite = row["problem"]
+        if favorite in counts:
+            counts[favorite] += 1
+        else:
+            counts[favorite] = 1
+
+# Print counts
+for favorite in sorted(counts, key=lambda problem: counts[problem], reverse=True):
+    print(f"{favorite}: {counts[favorite]}")
+#----------------------------------------------------
+print("----------------------------------------------")
+# Favorite problem instead of favorite language
+
+import csv
+
+# Open CSV file
+with open("favorites.csv", "r") as file:
+
+    # Create DictReader
+    reader = csv.DictReader(file)
+
+    # Counts
+    counts = {}
+
+    # Iterate over CSV file, counting favorites
+    for row in reader:
+        favorite = row["problem"]
+        if favorite in counts:
+            counts[favorite] += 1
+        else:
+            counts[favorite] = 1
+
+# Print count
+favorite = input("Favorite: ")
+if favorite in counts:
     print(f"{favorite}: {counts[favorite]}")
