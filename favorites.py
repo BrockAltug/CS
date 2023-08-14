@@ -1,4 +1,4 @@
-# Stores favorite in a variable
+# Prints all favorites in CSV using csv.reader
 
 import csv
 
@@ -13,5 +13,4 @@ with open("favorites.csv", "r") as file:
 
     # Iterate over CSV file, printing each favorite
     for row in reader:
-        favorite = row[1]
-        print(favorite)
+        print(row[1])
