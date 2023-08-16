@@ -1,2 +1,0 @@
-#cd ./prophecy
-#ls
