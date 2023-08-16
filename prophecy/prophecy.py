@@ -10,3 +10,4 @@
 #SELECT COUNT(*) AS number_of_students FROM students; --assasigns count as number_of_students
 #SELECT COUNT(*) FROM students WHERE house IS 'Slytherin'; --displays amount of students in the specified house
 #SELECT COUNT(*) FROM students GROUP BY house; -- shows number of students grouped by house
+#SELECT house, COUNT(*) FROM students GROUP BY house -- shows the name of the house first, and then the number of students grouped by house
