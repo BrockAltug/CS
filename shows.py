@@ -1,3 +1,4 @@
+#Comments are written with --like this
 #Helpful commands for the shows.db
 #sqlite3 shows.db in terminal to use
 #.schema to display each table
