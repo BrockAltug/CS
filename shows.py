@@ -24,3 +24,6 @@
 #Joining Tables Together
 
 #SELECT * FROM shows JOIN ratings on shows.id = ratings.show_id WHERE title = 'The Office';
+#SELECT title FROM people JOIN stars ON people.id = stars.person_id JOIN shows ON stars.show_id = shows.id WHERE name = `Steve Carell`;
+#SELECT title FROM people, stars, shows WHERE people.id = stars.person_id AND stars.show_id = shows.id AND name = 'Steve Carell';
+#SELECT * FROM people WHERE name LIKE 'Steve C%';
