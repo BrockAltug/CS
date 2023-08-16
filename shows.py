@@ -27,3 +27,11 @@
 #SELECT title FROM people JOIN stars ON people.id = stars.person_id JOIN shows ON stars.show_id = shows.id WHERE name = `Steve Carell`;
 #SELECT title FROM people, stars, shows WHERE people.id = stars.person_id AND stars.show_id = shows.id AND name = 'Steve Carell';
 #SELECT * FROM people WHERE name LIKE 'Steve C%';       //shows all people whos names are with Steve C
+
+#--------------------------------------------------
+#Creating Index
+#.timer on (type into sqlite)
+#SELECT * FROM shows WHERE title = 'The Office';
+#CREATE INDEX title_index on shows (title);        //creates new index
+#SELECT * FROM shows WHERE title = 'The Office';   //this now runs much more quickly
+#Unfortunately, indexing all columns would result in utilizing more storage space. Therefore, there is a tradeoff for enhanced speed.
