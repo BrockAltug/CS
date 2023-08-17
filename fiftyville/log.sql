@@ -69,15 +69,18 @@ AND day = 28
 AND duration < 60;
 
 --update flights to show name of origin and destination city
+-- Update origin airport
 UPDATE flights
 SET origin_airport_id = airports.city
 FROM airports
 WHERE flights.origin_airport_id = airports.id;
 
+-- Update destination airport
 UPDATE flights
 SET destination_airport_id = airports.city
 FROM airports
 WHERE flights.destination_airport_id = airports.id;
+
 
 --now showing the origin airport and destination airport at the time --id 36
 SELECT id, hour, minute, origin_airport_id, destination_airport_id
