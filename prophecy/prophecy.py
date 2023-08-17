@@ -11,3 +11,5 @@
 #SELECT COUNT(*) FROM students WHERE house IS 'Slytherin'; --displays amount of students in the specified house
 #SELECT COUNT(*) FROM students GROUP BY house; -- shows number of students grouped by house
 #SELECT house, COUNT(*) FROM students GROUP BY house -- shows the name of the house first, and then the number of students grouped by house
+#CREATE TABLE house (id INTEGER NOT NULL, house TEXT NOT NULL, head TEXT NOT NULL, PRIMARY KEY(id));  -- creates empty table for houses with subtables for id, house, and head
+#INSERT INTO houses (house, head) VALUES ('Gryffindor', 'McGonagall'); -- inserts head and house database from students
