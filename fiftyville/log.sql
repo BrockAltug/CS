@@ -41,15 +41,36 @@ AND month = 7
 AND day = 28
 AND duration < 60;
 
+--alter phone call tables to add caller and reciever names
+ALTER TABLE phone_calls
+ADD caller_name text;
+
+ALTER TABLE phone_calls
+ADD receiver_name text;
+--they will be empty when running the SELECT caller.... code above
+
+
+
+--update phone calls to get caller and receiver names
 UPDATE phone_calls
 SET caller_name = people.name
 FROM people
 WHERE phone_calls.caller = people.phone_number;
 
 UPDATE phone_calls
-SET receiver.name = people.name
+SET receiver_name = people.name
 FROM people
 WHERE phone_calls.receiver = people.phone_number;
+
+
+--now has caller and receiver name displaying as well as calling and receiving phone numbers
+SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
+WHERE year = 2021
+AND month = 7
+AND day = 28
+AND duration < 60;
+
+
 
 
 
