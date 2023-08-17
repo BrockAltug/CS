@@ -11,6 +11,15 @@ SELECT * FROM flights WHERE year = 2021 AND month = 7 AND day = 29 ORDER BY hour
 
 SELECT p.name, p.phone_number, ps.seat FROM passengers AS ps JOIN people AS p ON ps.passport_number = p.passport_number WHERE ps.flight_id = 36;
 
+SELECT license_plate FROM people WHERE phone_number = '(066) 555-9701';
+SELECT license_plate FROM people WHERE phone_number = '(130) 555-0289';
+SELECT license_plate FROM people WHERE phone_number = '(367) 555-5533';
+SELECT license_plate FROM people WHERE phone_number = '(328) 555-1152';
+SELECT license_plate FROM people WHERE phone_number = '(499) 555-9472';
+SELECT license_plate FROM people WHERE phone_number = '(286) 555-6063';
+SELECT license_plate FROM people WHERE phone_number = '(389) 555-5198';
+
+
 
 
 
