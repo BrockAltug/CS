@@ -81,6 +81,8 @@ LIMIT 1;
 --left from Fiftyville to New York City
 SELECT * FROM airports;
 
+
+--8 possible suspects
 SELECT flights.destination_airport_id, name, phone_number, license_plate from people
 JOIN passengers ON people.passport_number = passengers.passport_number
 JOIN flights ON flights.id = passengers.flight_id
