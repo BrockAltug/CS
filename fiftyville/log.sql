@@ -68,16 +68,7 @@ AND month = 7
 AND day = 28
 AND duration < 60;
 
-
---now showing the origin airport and destination airport at the time --id 36
-SELECT id, hour, minute, origin_airport_id, destination_airport_id
-FROM flights
-WHERE year = 2021
-AND month = 7
-AND day = 29
-ORDER BY hour ASC
-LIMIT 1;
-
+--update flights to show name of origin and destination city
 UPDATE flights
 SET origin_airport_id = airports.city
 FROM airports
@@ -87,6 +78,15 @@ UPDATE flights
 SET destination_airport_id = airports.city
 FROM airports
 WHERE flights.destination_airport_id = airports.id;
+
+--now showing the origin airport and destination airport at the time --id 36
+SELECT id, hour, minute, origin_airport_id, destination_airport_id
+FROM flights
+WHERE year = 2021
+AND month = 7
+AND day = 29
+ORDER BY hour ASC
+LIMIT 1;
 
 
 
