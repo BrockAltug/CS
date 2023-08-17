@@ -50,6 +50,8 @@ AND atm_transactions.transaction_type = "withdraw";
 --ALTER TABLE phone_calls
 --ADD receiver_name text;
 
+
+--update phone calls to get caller and receiver 
 UPDATE phone_calls
 SET caller_name = people.name
 FROM people
@@ -88,6 +90,42 @@ JOIN passengers ON people.passport_number = passengers.passport_number
 JOIN flights ON flights.id = passengers.flight_id
 WHERE flights.id = 36
 ORDER BY flights.hour ASC;
+
+
+--CS50 duck theft took place at 10:15 at Humphrey Street Bakery
+--security logs show 8 possible suspects
+--atm transactions show 8 possible suspect
+--call log shows 9 possible suspects
+--flight shows 8 possible suspects
+--get the name
+SELECT name FROM people
+JOIN passengers ON people.passport_number = passengers.passport_number
+JOIN flights ON flights.id = passengers.flight_id
+WHERE (flights.year = 2021 AND flights.month = 7 AND flights.day = 29 AND flights.id = 36)
+AND name IN
+(SELECT phone_calls.caller_name FROM phone_calls
+WHERE year = 2021
+AND month = 7
+AND day = 28
+AND duration < 60)
+AND name IN
+(SELECT people.name FROM people
+JOIN bank_accounts ON bank_accounts.person_id = people.id
+JOIN atm_transactions ON atm_transactions.account_number =
+bank_accounts.account_number
+WHERE atm_transactions.year = 2021
+AND atm_transactions.month = 7
+AND atm_transactions.day = 28
+AND atm_location = "Leggett Street"
+AND atm_transactions.transaction_type = "withdraw")
+AND name IN
+(SELECT people.name FROM people JOIN bakery_security_logs ON bakery_security_logs.license_plate = people.license_plate
+Where bakery_security_logs.year = 2021
+AND bakery_security_logs.month = 7
+AND bakery_security_logs.day = 28
+AND bakery_security_logs.hour = 10
+AND bakery_security_logs.minute >= 15
+AND bakery_security_logs.minute <= 25);
 
 
 
