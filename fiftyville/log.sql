@@ -4,7 +4,14 @@ SELECT * FROM crime_scene_reports WHERE year = 2021 AND month = 7 AND day = 28 A
 
 SELECT * FROM interviews WHERE year = 2021 AND month = 7 AND day = 28;
 
-SELECT * FROM bakery_security_logs WHERE year = 2021 AND month = 7 AND day = 28 AND activity LIKE '%car%';
+
+SELECT * FROM atm_transactions WHERE year = 2021 AND month = 7 AND day = 28 AND atm_location = 'Leggett Street';
+
+SELECT * FROM flights WHERE year = 2021 AND month = 7 AND day = 29 ORDER BY hour, minute LIMIT 1;
+
+SELECT p.*, a.* FROM passengers AS ps JOIN people AS p ON ps.passport_number = p.passport_number JOIN phone_calls AS a ON p.phone_number = a.caller WHERE ps.flight_id = FLIGHT_ID AND a.duration < 60;
+
+
 
 
 
