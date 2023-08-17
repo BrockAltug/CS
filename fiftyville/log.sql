@@ -11,7 +11,6 @@ SELECT * FROM flights WHERE year = 2021 AND month = 7 AND day = 29 ORDER BY hour
 
 SELECT p.name, ps.seat FROM passengers AS ps JOIN people AS p ON ps.passport_number = p.passport_number WHERE ps.flight_id = 36;
 
-SELECT a.receiver, a.duration FROM phone_calls AS a JOIN people AS p ON a.receiver = p.phone_number WHERE a.caller = 'THIEF_PHONE_NUMBER' AND a.duration < 60;
 
 
 
