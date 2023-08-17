@@ -36,18 +36,20 @@ AND atm_transactions.transaction_type = "withdraw";
 
 --witness says phone call for less than 1 minute, earliest flight the next day. other person on phone to purchase the flight ticket
 --find caller, reciever phone call less than 1 minute on the day
---now has caller and receiver name displaying as well as calling and receiving phone numbers
-SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
-WHERE year = 2021
-AND month = 7
-AND day = 28
-AND duration < 60;
---alter phone call tables to add caller and reciever names
-ALTER TABLE phone_calls
-ADD caller_name text;
 
-ALTER TABLE phone_calls
-ADD receiver_name text;
+--SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
+--WHERE year = 2021
+--AND month = 7
+--AND day = 28
+--AND duration < 60;
+
+--alter phone call tables to add caller and reciever names
+--ALTER TABLE phone_calls
+--ADD caller_name text;
+--ALTER TABLE phone_calls
+--ADD receiver_name text;
+--they will be empty when running the SELECT caller.... code above
+
 --update phone calls to get caller and receiver names
 UPDATE phone_calls
 SET caller_name = people.name
@@ -60,6 +62,32 @@ FROM people
 WHERE phone_calls.receiver = people.phone_number;
 
 
+--now has caller and receiver name displaying as well as calling and receiving phone numbers
+SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
+WHERE year = 2021
+AND month = 7
+AND day = 28
+AND duration < 60;
+
+--find the ID and origin and destination airport
+
+UPDATE flights
+SET origin_airport_id = airports.city
+FROM airports
+WHERE flights.origin_airport_id = airports.id;
+
+UPDATE flights
+SET destination_airport_id = airports.city
+FROM airports
+WHERE flights.destination_airport_id = airports.id;
+
+SELECT id, hour, minute, origin_airport_id, destination_airport_id
+FROM flights
+WHERE year = 2021
+AND month = 7
+AND day = 29
+ORDER BY hour ASC
+LIMIT 1;
 
 
 
