@@ -6,7 +6,7 @@ SELECT * FROM crime_scene_reports WHERE year = 2021 AND month = 7 AND day = 28 A
 -- Find interviews from witnesses for the specified crime scene report
 SELECT * FROM interviews WHERE year = 2021 AND month = 7 AND day = 28;
 
--- Find information about the accomplice
+-- Find information about the accomplice based on interview taking the earliest flight out of Fiftyville the next day
 --SELECT * FROM accomplices WHERE name = '<accomplice_name>';
 
 
