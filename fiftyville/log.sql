@@ -1,6 +1,6 @@
 -- Keep a log of any SQL queries you execute as you solve the mystery.
 
---find the date the crime took place and select description from crime scene report --was stolen from the bakery
+--find the date the crime took place and select description from crime scene report --was stolen from the Humphrey Street bakery at 10:15am
 SELECT description FROM crime_scene_reports WHERE year = 2021 AND month = 7 AND day = 28 AND street = 'Humphrey Street';
 
 --get interviews from people on the date of the crime related to the bakery
@@ -15,6 +15,8 @@ AND bakery_security_logs.day = 28
 AND bakery_security_logs.hour = 10
 AND bakery_security_logs.minute >= 15
 AND bakery_security_logs.minute <= 25;
+
+--8 possible suspects
 
 
 
