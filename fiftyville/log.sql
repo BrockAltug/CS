@@ -36,7 +36,12 @@ AND atm_transactions.transaction_type = "withdraw";
 
 --witness says phone call for less than 1 minute, earliest flight the next day. other person on phone to purchase the flight ticket
 --find caller, reciever phone call less than 1 minute on the day
-
+--now has caller and receiver name displaying as well as calling and receiving phone numbers
+SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
+WHERE year = 2021
+AND month = 7
+AND day = 28
+AND duration < 60;
 --alter phone call tables to add caller and reciever names
 ALTER TABLE phone_calls
 ADD caller_name text;
@@ -55,12 +60,6 @@ FROM people
 WHERE phone_calls.receiver = people.phone_number;
 
 
---now has caller and receiver name displaying as well as calling and receiving phone numbers
-SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
-WHERE year = 2021
-AND month = 7
-AND day = 28
-AND duration < 60;
 
 
 
