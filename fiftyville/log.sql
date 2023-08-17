@@ -9,7 +9,7 @@ SELECT * FROM atm_transactions WHERE year = 2021 AND month = 7 AND day = 28 AND 
 
 SELECT * FROM flights WHERE year = 2021 AND month = 7 AND day = 29 ORDER BY hour, minute LIMIT 1;
 
-SELECT p.name, ps.seat FROM passengers AS ps JOIN people AS p ON ps.passport_number = p.passport_number WHERE ps.flight_id = 36;
+SELECT p.name, p.phone_number, ps.seat FROM passengers AS ps JOIN people AS p ON ps.passport_number = p.passport_number WHERE ps.flight_id = 36;
 
 
 
