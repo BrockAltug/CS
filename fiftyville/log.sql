@@ -51,7 +51,7 @@ AND atm_transactions.transaction_type = "withdraw";
 --ADD receiver_name text;
 
 
---update phone calls to get caller and receiver 
+--update phone calls to get caller and receiver
 UPDATE phone_calls
 SET caller_name = people.name
 FROM people
@@ -126,6 +126,10 @@ AND bakery_security_logs.day = 28
 AND bakery_security_logs.hour = 10
 AND bakery_security_logs.minute >= 15
 AND bakery_security_logs.minute <= 25);
+
+--Bruce is the theif
+--Flight log shows Bruce traveled to New York City from Fiftyville
+--Call log shows Robin is accomplice
 
 
 
