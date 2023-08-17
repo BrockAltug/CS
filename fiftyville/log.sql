@@ -25,10 +25,10 @@ SELECT license_plate FROM people WHERE phone_number = '(286) 555-6063'; --1106N5
 SELECT license_plate FROM people WHERE phone_number = '(389) 555-5198'; --4328GD8
 
 --To retrieve security logs from the bakery security table where the day, month, year, and license plate match
-SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = 'M51FA04';
+SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = 'M51FA04'; --did not go to bakery
 SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = 'G412CB7';
 SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '94KL13X';
-SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '130LD9Z';
+SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '130LD9Z'; -- did not go
 SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '0NTHK55';
 SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '1106N58';
 SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 AND license_plate = '4328GD8';
@@ -53,7 +53,8 @@ SELECT name FROM people WHERE license_plate = '1106N58';
 SELECT name FROM people WHERE license_plate = '0NTHK55';
 SELECT name FROM people WHERE license_plate = '94KL13X';
 SELECT name FROM people WHERE license_plate = 'G412CB7';
-SELECT name FROM people WHERE license_plate = 'M51FA04';
+SELECT name FROM people WHERE license_plate = 'M51FA04'; -- did not goto bakery
+
 
 
 
