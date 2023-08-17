@@ -13,4 +13,5 @@
 #SELECT house, COUNT(*) FROM students GROUP BY house -- shows the name of the house first, and then the number of students grouped by house
 #CREATE TABLE house (id INTEGER NOT NULL, house TEXT NOT NULL, head TEXT NOT NULL, PRIMARY KEY(id));  -- creates empty table for houses with subtables for id, house, and head
 #INSERT INTO houses (house, head) VALUES ('Gryffindor', 'McGonagall'); -- inserts head and house database from students
-#CREATE TABLE assignments (student_id INTEGER )
+#CREATE TABLE assignments (student_id INT, house_id INT, FOREIGN KEY(student_id) REFERENCES students(id), FOREIGN KEY (house_id) REFERENCES houses(id)); -- creates new table assignments for values from student_id and house_id REFERENCES
+#INSERT INTO assignments (student_id, house_id) VALUES (1,4);
