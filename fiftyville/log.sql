@@ -42,6 +42,19 @@ SELECT * FROM phone_calls WHERE ((caller = '(499) 555-9472' AND year = 2021 AND 
 SELECT * FROM phone_calls WHERE ((caller = '(286) 555-6063' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(286) 555-6063' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
 SELECT * FROM phone_calls WHERE ((caller = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60; --didnt make a call at this time
 
+--get license plates from updated suspects
+SELECT license_plate FROM people WHERE phone_number = '(286) 555-6063'; --1106N58
+SELECT license_plate FROM people WHERE phone_number = '(499) 555-9472'; --0NTHK55
+SELECT license_plate FROM people WHERE phone_number = '(367) 555-5533'; --94KL13X
+SELECT license_plate FROM people WHERE phone_number = '(130) 555-0289'; --G412CB7
+SELECT license_plate FROM people WHERE phone_number = '(066) 555-9701'; --M51FA04
+
+SELECT name FROM people WHERE license_plate = '1106N58';
+SELECT name FROM people WHERE license_plate = '0NTHK55';
+SELECT name FROM people WHERE license_plate = '94KL13X';
+SELECT name FROM people WHERE license_plate = 'G412CB7';
+SELECT name FROM people WHERE license_plate = 'M51FA04';
+
 
 
 
