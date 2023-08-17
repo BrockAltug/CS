@@ -13,8 +13,15 @@ SELECT * FROM atm_transactions WHERE atm_location = 'Leggett Street' AND year = 
 --(3. thief made a phone call less than 1 minute after the robbery as they left bakery planning to take earliest flight out of the city the next day)
 SELECT * FROM bank_accounts WHERE account_number = 28500762;
 SELECT * FROM bank_accounts WHERE account_number = 28296815;
+SELECT * FROM bank_accounts WHERE account_number = 76054385;
+SELECT * FROM bank_accounts WHERE account_number = 49610011;
+SELECT * FROM bank_accounts WHERE account_number = 16153065;
+SELECT * FROM bank_accounts WHERE account_number = 86363979;
+SELECT * FROM bank_accounts WHERE account_number = 25506511;
+SELECT * FROM bank_accounts WHERE account_number = 81061156;
+SELECT * FROM bank_accounts WHERE account_number = 26013199;
 -- Find information about the accomplice based on interview taking the earliest flight out of Fiftyville the next day, and asked other person to purchase a flight ticket
-SELECT * FROM flights WHERE month = 7 AND day = 29;
+SELECT * FROM flights WHERE month = 7 AND day = 29 AND person_id =28500762;
 
 
 
