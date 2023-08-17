@@ -35,11 +35,21 @@ AND atm_transactions.transaction_type = "withdraw";
 
 --witness says phone call for less than 1 minute, earliest flight the next day. other person on phone to purchase the flight ticket
 --find caller, reciever phone call less than 1 minute on the day
-SELECT caller, receiver FROM phone_calls
+SELECT caller, caller_name receiver FROM phone_calls
 WHERE year = 2021
 AND month = 7
 AND day = 28
 AND duration < 60;
+
+UPDATE phone_calls
+SET caller_name = people.name
+FROM people
+WHERE phone_calls.caller = people.phone_number;
+
+UPDATE phone_calls
+SET receiver.name = people.name
+FROM people
+WHERE phone_calls.receiver = people.phone_number;
 
 
 
