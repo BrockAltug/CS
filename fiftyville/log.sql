@@ -23,3 +23,6 @@ SELECT p.name, p.phone_number, ps.seat FROM passengers AS ps JOIN people AS p ON
 
 
 
+
+
+
