@@ -37,10 +37,10 @@ SELECT * FROM bakery_security_logs WHERE day = 28 AND month = 7 AND year = 2021 
 SELECT * FROM phone_calls WHERE ((caller = '(066) 555-9701' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(066) 555-9701' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
 SELECT * FROM phone_calls WHERE ((caller = '(130) 555-0289' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(130) 555-0289' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
 SELECT * FROM phone_calls WHERE ((caller = '(367) 555-5533' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(367) 555-5533' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
-SELECT * FROM phone_calls WHERE ((caller = '(328) 555-1152' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(328) 555-1152' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
+SELECT * FROM phone_calls WHERE ((caller = '(328) 555-1152' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(328) 555-1152' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60; --didnt make a call at this time
 SELECT * FROM phone_calls WHERE ((caller = '(499) 555-9472' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(499) 555-9472' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
 SELECT * FROM phone_calls WHERE ((caller = '(286) 555-6063' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(286) 555-6063' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
-SELECT * FROM phone_calls WHERE ((caller = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60;
+SELECT * FROM phone_calls WHERE ((caller = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28) OR (receiver = '(389) 555-5198' AND year = 2021 AND month = 7 AND day = 28)) AND duration < 60; --didnt make a call at this time
 
 
 
