@@ -7,6 +7,7 @@ SELECT * FROM crime_scene_reports WHERE year = 2021 AND month = 7 AND day = 28 A
 SELECT * FROM interviews WHERE year = 2021 AND month = 7 AND day = 28;
 
 -- Find information about the accomplice based on interview taking the earliest flight out of Fiftyville the next day
+SELECT * FROM flights WHERE month = 7 AND day = 29;
 
 
 
