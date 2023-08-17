@@ -61,7 +61,6 @@ SET receiver_name = people.name
 FROM people
 WHERE phone_calls.receiver = people.phone_number;
 
-
 --now has caller and receiver name displaying as well as calling and receiving phone numbers
 SELECT caller, caller_name, receiver, receiver_name FROM phone_calls
 WHERE year = 2021
@@ -69,7 +68,15 @@ AND month = 7
 AND day = 28
 AND duration < 60;
 
---find the ID and origin and destination airport
+
+--now showing the origin airport and destination airport at the time --id 36
+SELECT id, hour, minute, origin_airport_id, destination_airport_id
+FROM flights
+WHERE year = 2021
+AND month = 7
+AND day = 29
+ORDER BY hour ASC
+LIMIT 1;
 
 UPDATE flights
 SET origin_airport_id = airports.city
@@ -81,13 +88,8 @@ SET destination_airport_id = airports.city
 FROM airports
 WHERE flights.destination_airport_id = airports.id;
 
-SELECT id, hour, minute, origin_airport_id, destination_airport_id
-FROM flights
-WHERE year = 2021
-AND month = 7
-AND day = 29
-ORDER BY hour ASC
-LIMIT 1;
+
+
 
 
 
