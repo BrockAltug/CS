@@ -36,6 +36,57 @@ AND atm_transactions.day = 28
 AND atm_location = "Leggett Street"
 AND atm_transactions.transaction_type = "withdraw";
 
+--get the caller and reciever information on calls less than 1 minute on the date of the crim
+--SELECT caller, caller_name, receiver, receiver_name  FROM phone_calls
+--WHERE year = 2021
+--AND month = 7
+--AND day = 28
+--AND duration < 60;
+
+--add for caller name and reciever name to phone calls
+--ALTER TABLE phone_calls
+--ADD caller_name text;
+
+--ALTER TABLE phone_calls
+--ADD receiver_name text;
+
+UPDATE phone_calls
+SET caller_name = people.name
+FROM people
+WHERE phone_calls.caller = people.phone_number;
+
+UPDATE phone_calls
+SET receiver_name = people.name
+FROM people
+WHERE phone_calls.receiver = people.phone_number;
+
+--get the caller and reciever information on calls less than 1 minute on the date of the crim
+SELECT caller, caller_name, receiver, receiver_name  FROM phone_calls
+WHERE year = 2021
+AND month = 7
+AND day = 28
+AND duration < 60;
+
+--get origin and destination based on time (1 day after crime earliest flight that day) --returns ID 36 ONLY
+SELECT id, hour, minute, origin_airport_id, destination_airport_id
+FROM flights
+WHERE year = 2021
+AND month = 7
+AND day = 29
+ORDER BY hour ASC
+LIMIT 1;
+
+--update to show names of origin and destination id
+UPDATE flights
+SET origin_airport_id = airports.city
+FROM airports
+WHERE flights.origin_airport_id = airports.id;
+
+UPDATE flights
+SET destination_auirport_id = airports.city
+FROM airports
+WHERE flights.destination_airport_id = airports.id;
+
 
 
 
