@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<!-- Demonstrates HTML using Javascript (document.addEventListener) -->
+
+<html lang="en">
+    <head>
+        <title>
+            hello, title
+        </title>
+    </head>
+    <body>
+        <!-- add a form -->
+        <form>
+            <!-- create a text box(type) for user input name(input placeholder="Name") -->
+            <input autocomplete="off" autofocus id="name" placeholder="Name" type="text">
+            <!-- create a submit button named Greet-->
+            <button type="submit">Greet</button>
+        </form>
+        <!-- add javascript-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+            //using querySelector with form
+            document.querySelector('form').addEventListener('submit', function(){
+                //new variable for name
+                let name = document.querySelector('#name').value;
+                alert('hello, ' + name)
+                //prevent default event
+                event.preventDefault();
+            });
+        });
+
+        </script>
+    </body>
+</html>
