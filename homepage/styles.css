@@ -1,9 +1,14 @@
+/* Reset default margin and padding on all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Apply some basic styling to the body */
 body {
     font-family: 'Arial', sans-serif;
     background-image: linear-gradient(to bottom, #b19cd9, #6ad5e3);
-    margin: 0;
-    padding: 0;
     color: #333;
 }
 
@@ -40,9 +45,4 @@ p {
     color: #666;
     font-size: 1.1rem;
     line-height: 1.6;
-}
-
-/* Add margin to the top of the container */
-.mt-5 {
-    margin-top: 3rem;
 }
