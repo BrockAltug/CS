@@ -10,6 +10,9 @@ body {
     font-family: 'Arial', sans-serif;
     background-image: linear-gradient(to bottom, #b19cd9, #6ad5e3);
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
 }
 
 /* Style the navigation bar */
@@ -30,7 +33,11 @@ body {
 
 /* Center content on the page */
 .container {
-    text-align: center;
+    flex: 1; /* Allow the container to expand and fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 50px;
 }
 
