@@ -1,0 +1,45 @@
+/* Apply some basic styling to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the navigation bar */
+.navbar {
+    background-color: #ffffff;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+}
+
+/* Center content on the page */
+.container {
+    text-align: center;
+    padding: 50px;
+}
+
+/* Style headings */
+h1 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Style paragraphs */
+p {
+    color: #666666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Add margin to the top of the container */
+.mt-5 {
+    margin-top: 3rem;
+}
