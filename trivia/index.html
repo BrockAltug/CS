@@ -1,90 +1,89 @@
-<!-- Define the document type and the language of the document -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Link the external stylesheet for styling -->
+    <!-- link the external stylesheet for styling -->
     <link href="styles.css" rel="stylesheet">
-    <!-- Set the title of the webpage -->
+    <!-- set the title of the webpage -->
     <title>Trivia Game</title>
 </head>
 <body>
-    <!-- Create a header section -->
+    <!-- create a header section -->
     <div class="header">
         <h1>Trivia Game</h1>
     </div>
 
-    <!-- Create a container for the trivia sections -->
+    <!-- create a container for the trivia sections -->
     <div class="container">
-        <!-- Section for multiple-choice trivia -->
+        <!-- section for multiple-choice trivia -->
         <div class="section">
-            <!-- Display the section title -->
+            <!-- display the section title -->
             <h2>Part 1: Multiple-Choice Trivia</h2>
-            <!-- Add a horizontal line -->
+            <!-- add a horizontal line -->
             <hr>
-            <!-- Display the question for multiple-choice trivia -->
+            <!-- display the question for multiple-choice trivia -->
             <h3 id="mc-question">What is the capital of Italy?</h3>
-            <!-- Create buttons for different options -->
+            <!-- create buttons for different options -->
             <button class="mc-button" id="mc-option1">Rome</button>
             <button class="mc-button" id="mc-option2">Madrid</button>
             <button class="mc-button" id="mc-option3">Paris</button>
-            <!-- Display feedback for multiple-choice answers -->
+            <!-- display feedback for multiple-choice answers -->
             <p class="mc-feedback" id="mc-feedback"></p>
         </div>
 
-        <!-- Section for free response trivia -->
+        <!-- section for free response trivia -->
         <div class="section">
-            <!-- Display the section title -->
+            <!-- display the section title -->
             <h2>Part 2: Free Response Trivia</h2>
-            <!-- Add a horizontal line -->
+            <!-- add a horizontal line -->
             <hr>
-            <!-- Display the question for free response trivia -->
+            <!-- display the question for free response trivia -->
             <h3 id="fr-question">What is 10 + 5?</h3>
-            <!-- Create an input field for user's answer -->
+            <!-- create an input field for user's answer -->
             <input type="text" id="fr-answer" placeholder="Your answer">
-            <!-- Create a button to confirm the answer -->
+            <!-- create a button to confirm the answer -->
             <button id="fr-confirm">Confirm Answer</button>
-            <!-- Display feedback for free response answers -->
+            <!-- display feedback for free response answers -->
             <p class="fr-feedback" id="fr-feedback"></p>
         </div>
     </div>
 
     <!-- JavaScript code for interactive functionality -->
     <script>
-        // Execute when the document is fully loaded
+        // execute when the document is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Get all multiple-choice answer buttons
+            // get all multiple-choice answer buttons
             const mcButtons = document.querySelectorAll('.mc-button');
-            // Get the element to display multiple-choice feedback
+            // get the element to display multiple-choice feedback
             const mcFeedback = document.getElementById('mc-feedback');
 
-            // Attach click event listeners to each multiple-choice button
+            // attach click event listeners to each multiple-choice button
             mcButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // Check if the selected option is correct
+                    // check if the selected option is correct
                     const isCorrect = button.textContent === 'Rome';
-                    // Display feedback based on correctness
+                    // display feedback based on correctness
                     mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect';
-                    // Set feedback text color based on correctness
+                    // set feedback text color based on correctness
                     mcFeedback.style.color = isCorrect ? 'green' : 'red';
                 });
             });
 
-            // Get the input field for free response answer
+            // get the input field for free response answer
             const frAnswer = document.getElementById('fr-answer');
-            // Get the button to confirm free response answer
+            // get the button to confirm free response answer
             const frConfirm = document.getElementById('fr-confirm');
-            // Get the element to display free response feedback
+            // get the element to display free response feedback
             const frFeedback = document.getElementById('fr-feedback');
 
-            // Attach click event listener to the free response confirm button
+            // attach click event listener to the free response confirm button
             frConfirm.addEventListener('click', () => {
-                // Get the user's provided answer
+                // get the user's provided answer
                 const userAnswer = frAnswer.value;
-                // Check if the answer is correct
+                // check if the answer is correct
                 const isCorrect = userAnswer === '15';
-                // Display feedback based on correctness
+                // display feedback based on correctness
                 frFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect';
-                // Set feedback text color based on correctness
+                // set feedback text color based on correctness
                 frFeedback.style.color = isCorrect ? 'green' : 'red';
             });
         });
