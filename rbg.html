@@ -1,28 +1,34 @@
+<!-- Declare the document type and HTML root element -->
 <!DOCTYPE html>
-
-<!-- Demonstrates programmatic changes to style -->
-
+<!-- Start the HTML document and set the language -->
 <html lang="en">
     <head>
+        <!-- Set the title of the web page -->
         <title>background</title>
     </head>
     <body>
+        <!-- Create buttons to change background color -->
         <button id="red">R</button>
         <button id="green">G</button>
         <button id="blue">B</button>
         <script>
-
+            // Select the body element
             let body = document.querySelector('body');
+            // Add event listener to the red button
             document.querySelector('#red').addEventListener('click', function() {
+                // Change the body background color to red
                 body.style.backgroundColor = 'red';
             });
+            // Add event listener to the green button
             document.querySelector('#green').addEventListener('click', function() {
+                // Change the body background color to green
                 body.style.backgroundColor = 'green';
             });
+            // Add event listener to the blue button
             document.querySelector('#blue').addEventListener('click', function() {
+                // Change the body background color to blue
                 body.style.backgroundColor = 'blue';
             });
-
         </script>
     </body>
 </html>
