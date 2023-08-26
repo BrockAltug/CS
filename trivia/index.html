@@ -1,31 +1,72 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-        <link href="styles.css" rel="stylesheet">
-        <title>Trivia!</title>
-        <script>
-            // TODO: Add code to check answers to questions
-        </script>
-    </head>
-    <body>
-        <div class="header">
-            <h1>Trivia!</h1>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        // JavaScript code as described in the previous responses
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice</h2>
+            <hr>
+            <!-- Question 1 -->
+            <h3>What is the capital of France?</h3>
+            <button class="answer-button">Paris</button>
+            <button class="answer-button">Berlin</button>
+            <button class="answer-button">Madrid</button>
+            <p class="feedback"></p>
         </div>
 
-        <div class="container">
-            <div class="section">
-                <h2>Part 1: Multiple Choice </h2>
-                <hr>
-                <!-- TODO: Add multiple choice question here -->
-            </div>
-
-            <div class="section">
-                <h2>Part 2: Free Response</h2>
-                <hr>
-                <!-- TODO: Add free response question here -->
-            </div>
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <!-- Question 2 -->
+            <h3>What is the largest mammal?</h3>
+            <input type="text" id="free-response-input">
+            <button id="confirm-button">Confirm</button>
+            <p class="feedback"></p>
         </div>
-    </body>
+
+        <!-- New Questions -->
+        <div class="section">
+            <h2>Part 3: Multiple Choice</h2>
+            <hr>
+            <!-- Question 3 -->
+            <h3>Which planet is known as the "Red Planet"?</h3>
+            <button class="answer-button">Mars</button>
+            <button class="answer-button">Venus</button>
+            <button class="answer-button">Jupiter</button>
+            <p class="feedback"></p>
+        </div>
+
+        <div class="section">
+            <h2>Part 4: Free Response</h2>
+            <hr>
+            <!-- Question 4 -->
+            <h3>What is the chemical symbol for gold?</h3>
+            <input type="text" id="free-response-input2">
+            <button class="confirm-button">Confirm</button>
+            <p class="feedback"></p>
+        </div>
+
+        <div class="section">
+            <h2>Part 5: Multiple Choice</h2>
+            <hr>
+            <!-- Question 5 -->
+            <h3>Which famous scientist developed the theory of general relativity?</h3>
+            <button class="answer-button">Isaac Newton</button>
+            <button class="answer-button">Albert Einstein</button>
+            <button class="answer-button">Niels Bohr</button>
+            <p class="feedback"></p>
+        </div>
+    </div>
+</body>
 </html>
