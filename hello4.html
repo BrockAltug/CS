@@ -16,19 +16,5 @@
             <!-- create a submit button named Greet-->
             <button type="submit">Greet</button>
         </form>
-        <!-- add javascript-->
-        <script>
-            document.addEventListener('DOMContentLoaded', function(){
-            //using querySelector with form
-            document.querySelector('form').addEventListener('submit', function(){
-                //new variable for name
-                let name = document.querySelector('#name').value;
-                alert('hello, ' + name)
-                //prevent default event
-                event.preventDefault();
-            });
-        });
-
-        </script>
     </body>
 </html>
