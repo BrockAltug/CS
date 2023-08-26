@@ -1,16 +1,24 @@
+<!-- declare the document type and HTML root element -->
 <!DOCTYPE html>
-
 <html lang="en">
+    <!-- start of the head section -->
     <head>
+        <!-- Set the title of the web page -->
         <title>geolocation</title>
+    <!-- end of the head section -->
     </head>
+    <!-- start of the body section -->
     <body>
+        <!-- open a script tag to include JavaScript code -->
         <script>
-
+            // use the navigator object to access geolocation functionality
+            // retrieve the current position using getCurrentPosition method
             navigator.geolocation.getCurrentPosition(function(position) {
+                // write the latitude and longitude to the document
                 document.write(position.coords.latitude + ", " + position.coords.longitude);
             });
-
         </script>
+    <!-- end of the body section -->
     </body>
+<!-- end of the HTML document -->
 </html>
