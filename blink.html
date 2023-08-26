@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <script>
-            //toggles visibility of greeting
+            // Toggles visibility of greeting
             function blink(){
                 let body = document.querySelector('body');
-                if(body.style.visibility == 'hidden'){
-                    body.style.visibility == 'visible';
-                }
-                else{
+                if (body.style.visibility === 'hidden') {
+                    body.style.visibility = 'visible';
+                } else {
                     body.style.visibility = 'hidden';
                 }
             }
-            //blink every 500ms
+            // Blink every 500ms
             window.setInterval(blink, 500);
         </script>
-
     </head>
     <body>
         hello, body
     </body>
-
 </html>
