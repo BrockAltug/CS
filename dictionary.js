@@ -25,32 +25,6 @@ const WORDS = [
     'walrus', 'whale', 'warthog',
     'xenarthra', 'x-ray tetra', 'xylophone',
     'yak', 'yellowjacket', 'yabby',
-    'zebra', 'zebu', 'zorilla',
-    'albatross', 'armadillo', 'antelope',
-    'bluebird', 'buffalo', 'butterfly',
-    'chameleon', 'cheetah', 'crocodile',
-    'dalmatian', 'dandelion', 'dolphin',
-    'elephant', 'emu', 'eagle',
-    'flamingo', 'fennec fox', 'firefly',
-    'giraffe', 'gorilla', 'gecko',
-    'hedgehog', 'hippopotamus', 'hummingbird',
-    'iguana', 'impala', 'insect',
-    'jaguar', 'jellyfish', 'jackal',
-    'kangaroo', 'kiwi', 'kingfisher',
-    'lemur', 'lion', 'llama',
-    'meerkat', 'moose', 'macaw',
-    'newt', 'nightingale', 'narwhal',
-    'ocelot', 'octopus', 'otter',
-    'panda', 'panther', 'peacock',
-    'quetzal', 'quokka', 'quail',
-    'rhinoceros', 'rabbit', 'raccoon',
-    'seahorse', 'seagull', 'sloth',
-    'tiger', 'toucan', 'tarsier',
-    'umbrellabird', 'urchin', 'unicorn',
-    'vulture', 'vicuña', 'viper',
-    'whale', 'wombat', 'warthog',
-    'xenops', 'x-ray tetra', 'xylophone',
-    'yak', 'yellowjacket', 'yabby',
     'zebra', 'zebu', 'zorilla'
 ];
 
@@ -60,15 +34,22 @@ const ul = document.querySelector('ul');
 input.addEventListener('keyup', function(event) {
     const inputValue = input.value.toLowerCase(); // Convert input to lowercase
     let html = '';
+    const uniqueMatches = new Set(); // To store unique matches
 
     if (inputValue) {
         for (word of WORDS) {
-            if (word.toLowerCase().startsWith(inputValue)) { // Convert word to lowercase for comparison
-                html += `<li>${word}</li>`;
+            if (word.toLowerCase().startsWith(inputValue)) {
+                uniqueMatches.add(word.toLowerCase()); // Add lowercase match to the set
             }
         }
+        // Convert unique matches set back to an array for sorting and displaying
+        const sortedMatches = [...uniqueMatches].sort();
+        sortedMatches.forEach(match => {
+            html += `<li>${match}</li>`;
+        });
     }
 
     ul.innerHTML = html;
 });
+
 
