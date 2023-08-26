@@ -2,7 +2,79 @@
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #fff;
+            color: #212529;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+        }
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .header {
+            background-color: #477bff;
+            color: #fff;
+            margin-bottom: 2rem;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 0.5rem 2rem 1rem 2rem;
+        }
+
+        .section:hover {
+            background-color: #f5f5f5;
+            transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+        }
+
+        button, input[type="submit"] {
+            background-color: #d9edff;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+            padding: 0.375rem 0.75rem;
+            text-align: center;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            vertical-align: middle;
+        }
+
+        input[type="text"] {
+            line-height: 1.8;
+            width: 25%;
+        }
+
+        input[type="text"]:hover {
+            background-color: #f5f5f5;
+            transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+        }
+
+        /* Additional styles for new requirements */
+        #options {
+            margin-top: 10px;
+        }
+
+        #submit-button {
+            margin-top: 10px;
+        }
+    </style>
     <title>Trivia!</title>
 </head>
 <body>
@@ -11,114 +83,96 @@
     </div>
 
     <div class="container">
-        <div class="section">
-            <h2>Part 1: Multiple Choice</h2>
+        <div class="section" id="question-section">
+            <h2>Trivia Quiz</h2>
             <hr>
-            <!-- Question 1 -->
-            <h3>What is the capital of France?</h3>
-            <button class="answer-button">Paris</button>
-            <button class="answer-button">Berlin</button>
-            <button class="answer-button">Madrid</button>
-            <p class="feedback"></p>
+            <h3 id="question-text"></h3>
+            <div id="options"></div>
+            <button id="submit-button">Submit</button>
+            <p class="feedback" id="feedback-text"></p>
         </div>
 
-        <div class="section">
-            <h2>Part 2: Free Response</h2>
+        <div class="section" id="result-section">
+            <h2>Quiz Results</h2>
             <hr>
-            <!-- Question 2 -->
-            <h3>What is the largest mammal?</h3>
-            <input type="text" id="free-response-input">
-            <button class="confirm-button">Confirm</button>
-            <p class="feedback"></p>
-        </div>
-
-        <!-- New Questions -->
-        <div class="section">
-            <h2>Part 3: Multiple Choice</h2>
-            <hr>
-            <!-- Question 3 -->
-            <h3>Which planet is known as the "Red Planet"?</h3>
-            <button class="answer-button">Mars</button>
-            <button class="answer-button">Venus</button>
-            <button class="answer-button">Jupiter</button>
-            <p class="feedback"></p>
-        </div>
-
-        <div class="section">
-            <h2>Part 4: Free Response</h2>
-            <hr>
-            <!-- Question 4 -->
-            <h3>What is the chemical symbol for gold?</h3>
-            <input type="text" id="free-response-input2">
-            <button class="confirm-button">Confirm</button>
-            <p class="feedback"></p>
-        </div>
-
-        <div class="section">
-            <h2>Part 5: Multiple Choice</h2>
-            <hr>
-            <!-- Question 5 -->
-            <h3>Which famous scientist developed the theory of general relativity?</h3>
-            <button class="answer-button">Isaac Newton</button>
-            <button class="answer-button">Albert Einstein</button>
-            <button class="answer-button">Niels Bohr</button>
-            <p class="feedback"></p>
+            <p id="final-score"></p>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const answerButtons = document.querySelectorAll('.answer-button');
-            const feedbackElements = document.querySelectorAll('.feedback');
-            const freeResponseInput = document.getElementById('free-response-input');
-            const freeResponseInput2 = document.getElementById('free-response-input2');
-            const confirmButtons = document.querySelectorAll('.confirm-button');
+            const questions = [
+                {
+                    question: 'What is the capital of France?',
+                    options: ['Paris', 'Berlin', 'Madrid'],
+                    correct: 'Paris'
+                },
+                {
+                    question: 'Which planet is known as the "Red Planet"?',
+                    options: ['Mars', 'Venus', 'Jupiter'],
+                    correct: 'Mars'
+                },
+                {
+                    question: 'Which famous scientist developed the theory of general relativity?',
+                    options: ['Isaac Newton', 'Albert Einstein', 'Niels Bohr'],
+                    correct: 'Albert Einstein'
+                }
+            ];
 
-            answerButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    answerButtons.forEach(btn => {
-                        btn.classList.remove('selected');
+            let currentQuestion = 0;
+            let score = 0;
+
+            const questionSection = document.getElementById('question-section');
+            const resultSection = document.getElementById('result-section');
+            const questionText = document.getElementById('question-text');
+            const optionsDiv = document.getElementById('options');
+            const submitButton = document.getElementById('submit-button');
+            const feedbackText = document.getElementById('feedback-text');
+            const finalScore = document.getElementById('final-score');
+
+            function displayQuestion(questionIndex) {
+                if (questionIndex < questions.length) {
+                    questionText.textContent = questions[questionIndex].question;
+                    optionsDiv.innerHTML = '';
+                    questions[questionIndex].options.forEach((option, index) => {
+                        const button = document.createElement('button');
+                        button.textContent = option;
+                        button.classList.add('answer-button');
+                        optionsDiv.appendChild(button);
+                        button.addEventListener('click', () => {
+                            checkAnswer(index);
+                        });
                     });
-                    button.classList.add('selected');
-                    const correctAnswers = ['Paris', 'blue whale', 'Mars', 'gold', 'Albert Einstein'];
-                    const userAnswers = [null, 'blue whale', null, null, 'einstein'];
-                    const feedback = button.textContent === correctAnswers[index] ? 'Correct!' : 'Incorrect';
-                    const feedbackClass = button.textContent === correctAnswers[index] ? 'correct-feedback' : 'incorrect-feedback';
-                    feedbackElements[index].textContent = feedback;
-                    feedbackElements[index].classList.remove('correct-feedback', 'incorrect-feedback');
-                    feedbackElements[index].classList.add(feedbackClass);
+                } else {
+                    questionSection.style.display = 'none';
+                    resultSection.style.display = 'block';
+                    finalScore.textContent = `Your final score is: ${score} out of ${questions.length}`;
+                }
+            }
 
-                    if (userAnswers[index] !== null) {
-                        if (userAnswers[index] !== correctAnswers[index]) {
-                            feedbackElements[index].textContent = 'Incorrect';
-                            feedbackElements[index].classList.remove('correct-feedback');
-                            feedbackElements[index].classList.add('incorrect-feedback');
-                        }
-                    }
-                });
+            function checkAnswer(selectedIndex) {
+                const correctIndex = questions[currentQuestion].options.indexOf(questions[currentQuestion].correct);
+                if (selectedIndex === correctIndex) {
+                    score++;
+                    feedbackText.textContent = 'Correct!';
+                    feedbackText.classList.add('correct-feedback');
+                    feedbackText.classList.remove('incorrect-feedback');
+                } else {
+                    feedbackText.textContent = 'Incorrect';
+                    feedbackText.classList.add('incorrect-feedback');
+                    feedbackText.classList.remove('correct-feedback');
+                }
+
+                currentQuestion++;
+                displayQuestion(currentQuestion);
+            }
+
+            submitButton.addEventListener('click', () => {
+                feedbackText.textContent = 'Please select an answer.';
             });
 
-            confirmButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    const userAnswers = ['blue whale', 'au', 'Mars', 'au', 'einstein'];
-                    const feedback = (index === 0 || index === 2 || index === 4) ?
-                        (freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect') :
-                        (freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect');
-                    const feedbackClass = (index === 0 || index === 2 || index === 4) ?
-                        (freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'correct-feedback' : 'incorrect-feedback') :
-                        (freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'correct-feedback' : 'incorrect-feedback');
-                    if (index === 0 || index === 2 || index === 4) {
-                        freeResponseInput2.classList.add(freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'correct-response' : 'incorrect-response');
-                    } else {
-                        freeResponseInput.classList.add(freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'correct-response' : 'incorrect-response');
-                    }
-                    feedbackElements[index].textContent = feedback;
-                    feedbackElements[index].classList.remove('correct-feedback', 'incorrect-feedback');
-                    feedbackElements[index].classList.add(feedbackClass);
-                });
-            });
+            displayQuestion(currentQuestion);
         });
     </script>
-
 </body>
 </html>
