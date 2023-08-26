@@ -4,6 +4,19 @@
 
 <html lang="en">
     <head>
+        <!-- add javascript-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+            //using querySelector with form
+            document.querySelector('form').addEventListener('submit', function(){
+                //new variable for name
+                let name = document.querySelector('#name').value;
+                alert('hello, ' + name)
+                //prevent default event
+                event.preventDefault();
+            });
+        });
+        </script>
         <title>
             hello, title
         </title>
