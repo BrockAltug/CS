@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Submissions</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Problem Submissions</h1>
+
+        <!-- Dropdown for sorting -->
+        <div class="mb-3">
+            <label for="sortSelect" class="form-label">Sort by Language:</label>
+            <select class="form-select" id="sortSelect">
+                <option value="default">Default</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Language</th>
+                    <th>Problem</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const data = [
+            { timestamp: '10/24/2022', language: 'C', problem: 'Credit' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Runoff' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Mario' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Scratch' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Readability' },
+            { timestamp: '10/24/2022', language: 'Scratch', problem: 'Mario' },
+            { timestamp: '10/24/2022', language: 'C', problem: 'Mario' },
+            { timestamp: '10/24/2022', language: 'C', problem: 'Runoff' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Scratch' },
+            { timestamp: '10/24/2022', language: 'C', problem: 'Mario' },
+            { timestamp: '10/24/2022', language: 'Scratch', problem: 'Readability' },
+            { timestamp: '10/24/2022', language: 'C', problem: 'Filter' },
+            { timestamp: '10/24/2022', language: 'C', problem: 'DNA' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'Speller' },
+            { timestamp: '10/24/2022', language: 'Python', problem: 'DNA' },
+            { timestamp: '10/25/2022', language: 'Python', problem: 'Readability' },
+            { timestamp: '10/25/2022', language: 'Python', problem: 'Mario' },
+            { timestamp: '10/25/2022', language: 'C', problem: 'Filter' },
+            { timestamp: '10/25/2022', language: 'Scratch', problem: 'Scratch' }
+            // Add more entries here...
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+        const sortSelect = document.getElementById('sortSelect');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+
+            for (const entry of data) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.timestamp}</td>
+                    <td>${entry.language}</td>
+                    <td>${entry.problem}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+
+        function sortDataByLanguage(sortOrder) {
+            const sortedData = [...data];
+
+            if (sortOrder === 'asc') {
+                sortedData.sort((a, b) => a.language.localeCompare(b.language));
+            } else if (sortOrder === 'desc') {
+                sortedData.sort((a, b) => b.language.localeCompare(a.language));
+            }
+
+            renderTable(sortedData);
+        }
+
+        sortSelect.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+
+            if (selectedValue === 'default') {
+                renderTable(data);
+            } else {
+                sortDataByLanguage(selectedValue);
+            }
+        });
+
+        // Initial rendering of the table
+        renderTable(data);
+    </script>
+</body>
+</html>
