@@ -23,7 +23,7 @@
         <div class="section">
             <h2>Part 2: Free Response Trivia</h2>
             <hr>
-            <h3 id="fr-question">Name a famous scientist.</h3>
+            <h3 id="fr-question">What is 10 + 5?</h3>
             <input type="text" id="fr-answer" placeholder="Your answer">
             <button id="fr-confirm">Confirm Answer</button>
             <p class="fr-feedback" id="fr-feedback"></p>
@@ -48,8 +48,8 @@
             const frFeedback = document.getElementById('fr-feedback');
 
             frConfirm.addEventListener('click', () => {
-                const userAnswer = frAnswer.value.toLowerCase();
-                const isCorrect = userAnswer.includes('scientist');
+                const userAnswer = frAnswer.value;
+                const isCorrect = userAnswer === '15';
                 frFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect';
                 frFeedback.style.color = isCorrect ? 'green' : 'red';
             });
