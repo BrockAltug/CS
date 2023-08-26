@@ -4,13 +4,25 @@
 
 <html lang="en">
     <head>
+        <!-- add javascript greet-->
+        <script>
+            //how to write a method in javascript
+            function greet(){
+                alert('hello, world')
+            }
+
+        </script>
+
+
         <title>
             hello, title
         </title>
     </head>
     <body>
         <!-- add a form -->
-        <form>
+        <!-- add attribute for onsubmit-->
+        <!-- calling to javascript greet()-->
+        <form onsubmit="greet(); return false;">
             <!-- create a text box(type) for user input name(input placeholder="Name") -->
             <input autocomplete="off" autofocus placeholder="Name" type="text">\
             <!-- create a submit button named Greet-->
