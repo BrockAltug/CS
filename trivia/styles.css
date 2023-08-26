@@ -60,7 +60,6 @@ input[type="text"]:hover {
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
-/* Additional styles for new requirements */
 #options {
     margin-top: 10px;
 }
