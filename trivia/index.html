@@ -1,113 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <title>Trivia!</title>
+    <title>Trivia Game</title>
 </head>
 <body>
     <div class="header">
-        <h1>Trivia!</h1>
+        <h1>Trivia Game</h1>
     </div>
 
     <div class="container">
-        <div class="section" id="question-section">
-            <h2>Trivia Quiz</h2>
+        <div class="section">
+            <h2>Part 1: Multiple-Choice Trivia</h2>
             <hr>
-            <h3 id="question-text"></h3>
-            <div id="options"></div>
-            <p class="feedback" id="feedback-text"></p>
+            <h3 id="mc-question">What is the capital of Italy?</h3>
+            <button class="mc-button" id="mc-option1">Rome</button>
+            <button class="mc-button" id="mc-option2">Madrid</button>
+            <button class="mc-button" id="mc-option3">Paris</button>
+            <p class="mc-feedback" id="mc-feedback"></p>
         </div>
 
-        <div class="section" id="result-section">
-            <h2>Quiz Results</h2>
+        <div class="section">
+            <h2>Part 2: Free Response Trivia</h2>
             <hr>
-            <p id="final-score"></p>
-            <button id="restart-button">Restart Quiz</button>
+            <h3 id="fr-question">Name a famous scientist.</h3>
+            <input type="text" id="fr-answer" placeholder="Your answer">
+            <button id="fr-confirm">Confirm Answer</button>
+            <p class="fr-feedback" id="fr-feedback"></p>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const questions = [
-                {
-                    question: 'What is the capital of France?',
-                    options: ['Paris', 'Berlin', 'Madrid'],
-                    correct: 'Paris'
-                },
-                {
-                    question: 'Which planet is known as the "Red Planet"?',
-                    options: ['Mars', 'Venus', 'Jupiter'],
-                    correct: 'Mars'
-                },
-                {
-                    question: 'Which famous scientist developed the theory of general relativity?',
-                    options: ['Isaac Newton', 'Albert Einstein', 'Niels Bohr'],
-                    correct: 'Albert Einstein'
-                }
-            ];
+            const mcButtons = document.querySelectorAll('.mc-button');
+            const mcFeedback = document.getElementById('mc-feedback');
 
-            let currentQuestion = 0;
-            let score = 0;
-
-            const questionSection = document.getElementById('question-section');
-            const resultSection = document.getElementById('result-section');
-            const questionText = document.getElementById('question-text');
-            const optionsDiv = document.getElementById('options');
-            const feedbackText = document.getElementById('feedback-text');
-            const finalScore = document.getElementById('final-score');
-            const restartButton = document.getElementById('restart-button');
-
-            function displayQuestion(questionIndex) {
-                if (questionIndex < questions.length) {
-                    questionText.textContent = questions[questionIndex].question;
-                    optionsDiv.innerHTML = '';
-                    questions[questionIndex].options.forEach((option, index) => {
-                        const button = document.createElement('button');
-                        button.textContent = option;
-                        button.classList.add('answer-button');
-                        optionsDiv.appendChild(button);
-                        button.addEventListener('click', () => {
-                            checkAnswer(index);
-                        });
-                    });
-                } else {
-                    questionSection.style.display = 'none';
-                    resultSection.style.display = 'block';
-                    finalScore.textContent = `Your final score is: ${score} out of ${questions.length}`;
-                }
-            }
-
-            function checkAnswer(selectedIndex) {
-                const correctIndex = questions[currentQuestion].options.indexOf(questions[currentQuestion].correct);
-                if (selectedIndex === correctIndex) {
-                    score++;
-                    feedbackText.textContent = 'Correct!';
-                    feedbackText.classList.add('correct-feedback');
-                    feedbackText.classList.remove('incorrect-feedback');
-                } else {
-                    feedbackText.textContent = 'Incorrect';
-                    feedbackText.classList.add('incorrect-feedback');
-                    feedbackText.classList.remove('correct-feedback');
-                }
-
-                currentQuestion++;
-                displayQuestion(currentQuestion);
-            }
-
-            restartButton.addEventListener('click', () => {
-                questionSection.style.display = 'block';
-                resultSection.style.display = 'none';
-                currentQuestion = 0;
-                score = 0;
-                displayQuestion(currentQuestion);
-
-                // Clear feedback text
-                feedbackText.textContent = '';
-                feedbackText.classList.remove('correct-feedback', 'incorrect-feedback');
+            mcButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const isCorrect = button.textContent === 'Rome';
+                    mcFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+                    mcFeedback.style.color = isCorrect ? 'green' : 'red';
+                });
             });
 
-            displayQuestion(currentQuestion);
+            const frAnswer = document.getElementById('fr-answer');
+            const frConfirm = document.getElementById('fr-confirm');
+            const frFeedback = document.getElementById('fr-feedback');
+
+            frConfirm.addEventListener('click', () => {
+                const userAnswer = frAnswer.value.toLowerCase();
+                const isCorrect = userAnswer.includes('scientist');
+                frFeedback.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+                frFeedback.style.color = isCorrect ? 'green' : 'red';
+            });
         });
     </script>
 </body>
