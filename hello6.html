@@ -1,0 +1,35 @@
+<!-- Declare the document type and HTML root element -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Open a script tag to include JavaScript code -->
+        <script>
+            // Add an event listener to execute code when the DOM content is loaded
+            document.addEventListener('DOMContentLoaded', function(){
+                // Select the input element and add an event listener to its 'keyup' event
+                let input = document.querySelector('input');
+                input.addEventListener('keyup', function(event){
+                    // Select the 'p' element
+                    let name = document.querySelector('p');
+                    // Check if the input value is not empty
+                    if (input.value) {
+                        // Update the 'name' element's content with the entered value
+                        name.innerHTML = 'hello, ' + input.value;
+                    }
+                    // If input value is empty
+                    else {
+                        // Set a default greeting when there's no input
+                        name.innerHTML = 'hello, whoever you are';
+                    }
+                });
+            });
+        </script>
+    </head>
+    <title>
+        <!-- Set the title of the web page -->
+        hello
+    </title>
+    <body>
+        <!-- An empty body, content will be dynamically added through JavaScript -->
+    </body>
+</html>
