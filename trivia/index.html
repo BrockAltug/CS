@@ -101,6 +101,10 @@
                 currentQuestion = 0;
                 score = 0;
                 displayQuestion(currentQuestion);
+
+                // Clear feedback text
+                feedbackText.textContent = '';
+                feedbackText.classList.remove('correct-feedback', 'incorrect-feedback');
             });
 
             displayQuestion(currentQuestion);
