@@ -4,9 +4,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <title>Trivia!</title>
-    <script>
-        // JavaScript code as described in the previous responses
-    </script>
 </head>
 <body>
     <div class="header">
@@ -68,5 +65,48 @@
             <p class="feedback"></p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const answerButtons = document.querySelectorAll('.answer-button');
+            const feedbackElements = document.querySelectorAll('.feedback');
+            const freeResponseInput = document.getElementById('free-response-input');
+            const freeResponseInput2 = document.getElementById('free-response-input2');
+            const confirmButtons = document.querySelectorAll('.confirm-button');
+
+            answerButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    answerButtons.forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    button.classList.add('selected');
+                    const correctAnswers = ['Paris', 'blue whale', 'Mars', 'gold', 'Albert Einstein'];
+                    const feedback = button.textContent === correctAnswers[index] ? 'Correct!' : 'Incorrect';
+                    const feedbackClass = button.textContent === correctAnswers[index] ? 'correct-feedback' : 'incorrect-feedback';
+                    feedbackElements[index].textContent = feedback;
+                    feedbackElements[index].classList.add(feedbackClass);
+                });
+            });
+
+            confirmButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const userAnswers = ['blue whale', 'au', 'Mars', 'einstein'];
+                    const feedback = (index === 0 || index === 2 || index === 4) ?
+                        (freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect') :
+                        (freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect');
+                    const feedbackClass = (index === 0 || index === 2 || index === 4) ?
+                        (freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'correct-feedback' : 'incorrect-feedback') :
+                        (freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'correct-feedback' : 'incorrect-feedback');
+                    if (index === 0 || index === 2 || index === 4) {
+                        freeResponseInput2.classList.add(freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'correct-response' : 'incorrect-response');
+                    } else {
+                        freeResponseInput.classList.add(freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'correct-response' : 'incorrect-response');
+                    }
+                    feedbackElements[index].textContent = feedback;
+                    feedbackElements[index].classList.add(feedbackClass);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
