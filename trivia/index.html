@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <style>
-        
-    </style>
+    <link href="styles.css" rel="stylesheet">
     <title>Trivia!</title>
 </head>
 <body>
@@ -18,7 +16,6 @@
             <hr>
             <h3 id="question-text"></h3>
             <div id="options"></div>
-            <button id="submit-button">Submit</button>
             <p class="feedback" id="feedback-text"></p>
         </div>
 
@@ -26,6 +23,7 @@
             <h2>Quiz Results</h2>
             <hr>
             <p id="final-score"></p>
+            <button id="restart-button">Restart Quiz</button>
         </div>
     </div>
 
@@ -56,9 +54,9 @@
             const resultSection = document.getElementById('result-section');
             const questionText = document.getElementById('question-text');
             const optionsDiv = document.getElementById('options');
-            const submitButton = document.getElementById('submit-button');
             const feedbackText = document.getElementById('feedback-text');
             const finalScore = document.getElementById('final-score');
+            const restartButton = document.getElementById('restart-button');
 
             function displayQuestion(questionIndex) {
                 if (questionIndex < questions.length) {
@@ -97,8 +95,12 @@
                 displayQuestion(currentQuestion);
             }
 
-            submitButton.addEventListener('click', () => {
-                feedbackText.textContent = 'Please select an answer.';
+            restartButton.addEventListener('click', () => {
+                questionSection.style.display = 'block';
+                resultSection.style.display = 'none';
+                currentQuestion = 0;
+                score = 0;
+                displayQuestion(currentQuestion);
             });
 
             displayQuestion(currentQuestion);
