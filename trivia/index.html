@@ -28,7 +28,7 @@
             <!-- Question 2 -->
             <h3>What is the largest mammal?</h3>
             <input type="text" id="free-response-input">
-            <button id="confirm-button">Confirm</button>
+            <button class="confirm-button">Confirm</button>
             <p class="feedback"></p>
         </div>
 
@@ -81,16 +81,26 @@
                     });
                     button.classList.add('selected');
                     const correctAnswers = ['Paris', 'blue whale', 'Mars', 'gold', 'Albert Einstein'];
+                    const userAnswers = [null, 'blue whale', null, null, 'einstein'];
                     const feedback = button.textContent === correctAnswers[index] ? 'Correct!' : 'Incorrect';
                     const feedbackClass = button.textContent === correctAnswers[index] ? 'correct-feedback' : 'incorrect-feedback';
                     feedbackElements[index].textContent = feedback;
+                    feedbackElements[index].classList.remove('correct-feedback', 'incorrect-feedback');
                     feedbackElements[index].classList.add(feedbackClass);
+
+                    if (userAnswers[index] !== null) {
+                        if (userAnswers[index] !== correctAnswers[index]) {
+                            feedbackElements[index].textContent = 'Incorrect';
+                            feedbackElements[index].classList.remove('correct-feedback');
+                            feedbackElements[index].classList.add('incorrect-feedback');
+                        }
+                    }
                 });
             });
 
             confirmButtons.forEach((button, index) => {
                 button.addEventListener('click', () => {
-                    const userAnswers = ['blue whale', 'au', 'Mars', 'einstein'];
+                    const userAnswers = ['blue whale', 'au', 'Mars', 'au', 'einstein'];
                     const feedback = (index === 0 || index === 2 || index === 4) ?
                         (freeResponseInput2.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect') :
                         (freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'Correct!' : 'Incorrect');
@@ -103,10 +113,12 @@
                         freeResponseInput.classList.add(freeResponseInput.value.trim().toLowerCase() === userAnswers[index] ? 'correct-response' : 'incorrect-response');
                     }
                     feedbackElements[index].textContent = feedback;
+                    feedbackElements[index].classList.remove('correct-feedback', 'incorrect-feedback');
                     feedbackElements[index].classList.add(feedbackClass);
                 });
             });
         });
     </script>
+
 </body>
 </html>
