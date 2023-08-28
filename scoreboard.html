@@ -3,6 +3,7 @@
 <head>
     <title>Scoreboard</title>
     <style>
+        /* CSS styles for the webpage */
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
@@ -45,23 +46,31 @@
         button:hover {
             background-color: #555;
         }
+        /* End of CSS styles */
     </style>
 </head>
 <body>
+    <!-- Header section -->
     <header>
         <h1>Basketball Game</h1>
         <p>Click the buttons to add a point to each team</p>
     </header>
+
+    <!-- Main content section -->
     <main>
+        <!-- Table for displaying scores and buttons -->
         <table>
+            <!-- Table header row -->
             <tr>
                 <th>Team 1</th>
                 <th>Team 2</th>
             </tr>
+            <!-- Table row for displaying current scores -->
             <tr>
                 <td id="score1">0</td>
                 <td id="score2">0</td>
             </tr>
+            <!-- Table row for +1 buttons -->
             <tr>
                 <td>
                     <button id="add1">+1</button>
@@ -70,6 +79,7 @@
                     <button id="add2">+1</button>
                 </td>
             </tr>
+            <!-- Table row for reset button -->
             <tr>
                 <td colspan="2">
                     <button id="reset">Reset Scores</button>
@@ -77,6 +87,8 @@
             </tr>
         </table>
     </main>
+
+    <!-- JavaScript section -->
     <script>
         // Get references to the score elements, buttons, and reset button
         const score1Element = document.getElementById("score1");
