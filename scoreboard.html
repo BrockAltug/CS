@@ -54,6 +54,7 @@
     <header>
         <h1>Basketball Game</h1>
         <p>Click the buttons to add a point to each team</p>
+        <p>First to 21 WINS!</p>
     </header>
 
     <!-- Main content section -->
@@ -105,20 +106,38 @@
         addButton1.addEventListener("click", () => {
             score1++;
             score1Element.textContent = score1;
+            checkForWinner();
         });
 
         addButton2.addEventListener("click", () => {
             score2++;
             score2Element.textContent = score2;
+            checkForWinner();
         });
 
         // Reset scores when the reset button is clicked
         resetButton.addEventListener("click", () => {
+            resetScores();
+        });
+
+        // Check for a winner
+        function checkForWinner() {
+            if (score1 === 21) {
+                alert("Team 1 has won!");
+                resetScores();
+            } else if (score2 === 21) {
+                alert("Team 2 has won!");
+                resetScores();
+            }
+        }
+
+        // Reset scores to 0
+        function resetScores() {
             score1 = 0;
             score2 = 0;
             score1Element.textContent = score1;
             score2Element.textContent = score2;
-        });
+        }
     </script>
 </body>
 </html>
