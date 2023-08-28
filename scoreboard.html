@@ -3,43 +3,77 @@
 <head>
     <title>Scoreboard</title>
     <style>
-        table {
-            border: 2px solid black;
-            border-collapse: collapse;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
-        td {
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        main {
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        table, th, td {
             border: 2px solid black;
+            padding: 10px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
-    <h1>Duke vs. UNC Basketball Game</h1>
-    <p>Scoresheet</p>
+    <header>
+        <h1>Duke vs. UNC Basketball Game</h1>
+        <p>Click the buttons to add a point to each team</p>
+    </header>
     <main>
-        Click the buttons to add a point to each team
+        <table>
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+            </tr>
+            <tr>
+                <td id="score1">0</td>
+                <td id="score2">0</td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="add1">+1</button>
+                </td>
+                <td>
+                    <button id="add2">+1</button>
+                </td>
+            </tr>
+        </table>
     </main>
-    <table>
-        <tr>
-            <td>Team 1</td>
-            <td>Team 2</td>
-        </tr>
-        <tr>
-            <td id="score1">0</td>
-            <td id="score2">0</td>
-        </tr>
-        <tr>
-            <td>
-                <button id="add1">+1</button>
-            </td>
-            <td>
-                <button id="add2">+1</button>
-            </td>
-        </tr>
-    </table>
     <script>
+        // JavaScript code can be added here to interact with the page's elements.
     </script>
 </body>
 </html>
