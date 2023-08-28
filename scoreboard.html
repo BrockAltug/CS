@@ -1,29 +1,40 @@
+<!-- This declaration specifies the document type and version of HTML being used. -->
 <!DOCTYPE html>
 
+<!-- The opening <html> tag marks the beginning of the HTML document. The "lang" attribute defines the language of the content. -->
 <html lang="en">
 <head>
+    <!-- The <title> element sets the title of the web page, which is displayed in the browser's title bar or tab. -->
     <title>Scoreboard</title>
-        <style>
-            table{
-                border: 2px solid black;
-                border-collapse: collapse;
-                margin-left: auto;
-                margin-right: auto;
-                text-align: center;
-            }
-            td {
-                border: 2px solid black;
-            }
-        </style>
+
+    <!-- The <style> element contains CSS rules that define the visual appearance of elements on the web page. -->
+    <style>
+        /* CSS rules for styling the <table> element. */
+        table {
+            border: 2px solid black; /* Border around the table */
+            border-collapse: collapse; /* Collapse border spacing */
+            margin-left: auto; /* Automatically center the table horizontally */
+            margin-right: auto; /* Automatically center the table horizontally */
+            text-align: center; /* Center-align the content within table cells */
+        }
+
+        /* CSS rules for styling <td> (table data) elements within the table. */
+        td {
+            border: 2px solid black; /* Border around table cells */
+        }
+    </style>
 </head>
 <body>
+    <!-- The <table> element defines a table to display data. -->
     <table>
+        <!-- The <tr> element defines a table row. -->
         <tr>
+            <!-- The <td> element defines a table cell for Team 1 data. -->
             <td>Team 1</td>
+
+            <!-- The second <td> element defines a table cell for Team 2 data. -->
             <td>Team 2</td>
         </tr>
     </table>
-
 </body>
-
 </html>
