@@ -1,0 +1,110 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: radial-gradient(circle, #a9f785, #7cfae5); /* Radial gradient background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333; /* Default text color */
+    line-height: 1.6; /* Improved line height for better readability */
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    color: #444; /* Slightly muted title color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+.container {
+    max-width: 40rem;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.pet-image {
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover; /* Maintain aspect ratio while covering container */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 0.5rem;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.meters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.meter {
+    text-align: center;
+}
+
+.meter-bar {
+    width: 100px;
+    height: 10px;
+    background-color: #eee;
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+    overflow: hidden; /* Hide overflowing fill */
+}
+
+.meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+.hunger-fill,
+.happiness-fill,
+.energy-fill {
+    border-radius: 5px;
+}
+
+.hunger-fill[data-value="4"],
+.happiness-fill[data-value="4"],
+.energy-fill[data-value="9"] {
+    background-color: #f39c12;
+}
+
+.hunger-fill[data-value="1"],
+.happiness-fill[data-value="1"],
+.energy-fill[data-value="1"] {
+    background-color: #f01901;
+}
+
+.button-container {
+    margin-top: 1.25rem;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    margin: 0.3125rem;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #2581c5;
+    transform: scale(1.05);
+}

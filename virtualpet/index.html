@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Virtual Pet</title>
+</head>
+<body>
+    <div class="container">
+        <div class="pet-container">
+            <img id="pet-image" src="pet.png" alt="Virtual Pet">
+        </div>
+        <div class="meters">
+            <div class="meter hunger-meter">
+                <div class="meter-label">Hunger:</div>
+                <div class="meter-bar">
+                    <div class="meter-fill hunger-fill" id="hunger-fill" data-value="5"></div>
+                </div>
+            </div>
+            <div class="meter happiness-meter">
+                <div class="meter-label">Happiness:</div>
+                <div class="meter-bar">
+                    <div class="meter-fill happiness-fill" id="happiness-fill" data-value="5"></div>
+                </div>
+            </div>
+            <div class="meter energy-meter">
+                <div class="meter-label">Energy:</div>
+                <div class="meter-bar">
+                    <div class="meter-fill energy-fill" id="energy-fill" data-value="10"></div>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="idle-btn">Idle</button>
+            <button id="lay-btn">Rest</button>
+            <button id="eat-btn">Feed</button>
+            <button id="play-btn">Play</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
