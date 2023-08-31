@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookstore</title>
+</head>
+<body>
+    <h1>Welcome to the Bookstore</h1>
+    <h2>Books Available:</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author }}, Price: ${{ book.price }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/cart" method="POST">
+        <label for="id">Add book to cart (Enter Book ID):</label>
+        <input type="text" name="id">
+        <button type="submit">Add to Cart</button>
+    </form>
+    <br>
+    <a href="/cart">Go to Cart</a>
+</body>
+</html>
