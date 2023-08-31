@@ -1,0 +1,16 @@
+<!-- Extend the "layout.html" template -->
+{% extends "layout.html" %}
+
+<!-- Define a block named "body" for content insertion -->
+{% block body %}
+
+    <!-- Create a form that will submit data to the "/login" route using the POST method -->
+    <form action="/login" method="post">
+        <!-- Input field for entering the user's name -->
+        <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+        <!-- Button to submit the form -->
+        <button type="submit">Log In</button>
+    </form>
+
+<!-- End the "body" block -->
+{% endblock %}

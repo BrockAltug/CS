@@ -1,0 +1,17 @@
+<!-- Extend the "layout.html" template -->
+{% extends "layout.html" %}
+
+<!-- Define a block named "body" for content insertion -->
+{% block body %}
+
+    <!-- Check if the "name" key exists in the session -->
+    {% if session["name"] %}
+        <!-- If logged in, display a message with the user's name and a logout link -->
+        You are logged in as {{ session["name"] }}. <a href="/logout">Log out</a>.
+    {% else %}
+        <!-- If not logged in, display a message with a login link -->
+        You are not logged in. <a href="/login">Log in</a>.
+    {% endif %}
+
+<!-- End the "body" block -->
+{% endblock %}
