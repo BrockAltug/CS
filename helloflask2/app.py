@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request     #has 3 functions imported from Flask framework        #examples with POST
+from flask import Flask, render_template, request     #has 3 functions imported from Flask framework        #examples with POST         get - gets information from user        post - displays information on server
 
 app = Flask(__name__)   #turns the file into a Flask application
 
