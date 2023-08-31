@@ -6,3 +6,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/register")
+def register():
+    return render_template("success.html")
+
