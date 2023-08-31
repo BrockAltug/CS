@@ -3,10 +3,16 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 REGISTRANTS = {}
+#SPORTS created so users can not create their own category from inspect element, for security
+SPORTS = [
+    "Basketball",
+    "Soccer",
+    "Football",
+]
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", sports=SPORTS)
 
 @app.route("/register", methods=["POST"])
 def register():

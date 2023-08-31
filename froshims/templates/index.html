@@ -5,9 +5,14 @@
         <input autocomplete="off" autofocus="autofocus" name="name" placeholder="Name" type="text">
         <select name="sport">
             <option disabled selected value="">Sport</option>    <!--creates empty disabled button for default choice-->
-            <option value="Basketball">Basketball</option>
-            <option value="Soccer">Soccer</option>
-            <option value="Football">Football</option>
+                <!-- Loop through the list of sports and create an option for each one -->
+                {% for sport in sports %}
+                <option value="{{ sport }}">{{ sport }}</option>
+                {% endfor %}
+            </select>
+            <!--<option value="Basketball">Basketball</option>-->
+            <!--<option value="Soccer">Soccer</option>-->
+            <!--<option value="Football">Football</option>-->
         </select>
         <button type="submit">Register</button>
     </form>
