@@ -2,12 +2,8 @@
 
 {% block body %}
 <ul>
-    {% for name in registrants %}
-
-    <li>{{ name }} is registered for {{ registrants[name] }}</li>
-
-    {% endfor %} <!--closes-->
+    {% for name, sport in registrants.items() %}
+    <li>{{ name }} is registered for {{ sport }}</li>
+    {% endfor %}
 </ul>
-
-
 {% endblock %}

@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-#cannot have variables same name as functions
-REGISTRANTS = {} #dictionary to store values for name, sport, capital for global
+
+REGISTRANTS = {}
 
 @app.route("/")
 def index():
@@ -18,4 +18,3 @@ def register():
 @app.route("/registrants")
 def registrants():
     return render_template("registrants.html", registrants=REGISTRANTS)
-
