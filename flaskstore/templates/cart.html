@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author }}, Price: ${{ book.price }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Continue Shopping</a>
+</body>
+</html>
