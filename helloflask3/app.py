@@ -3,7 +3,7 @@ from flask import Flask, render_template, request     #has 3 functions imported 
 app = Flask(__name__)   #turns the file into a Flask application
 
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def index():
     #if "name" in request.args:
     #    name = request.args["names"]
