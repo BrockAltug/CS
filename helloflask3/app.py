@@ -14,4 +14,4 @@ def index():
     if request.method == "GET":
          return render_template("index.html") #, placeholder=name) #placeholder changed to name variable
     elif request.method == "POST":
-        return render_template("greet.html", name=request.args.get("name" ))
+        return render_template("greet.html", name=request.args.get("name", "world"))
