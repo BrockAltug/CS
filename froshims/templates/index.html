@@ -2,7 +2,7 @@
 
 {% block body %}
     <form action="/register" method="post">
-        <input autocomplete="off" autofocus="autofocus" name="name" placeholder="Name" type="text">
+        <input autocomplete="off" autofocus="autofocus" name="name" placeholder="Name" required type="text">  <!--required forces user-->
         <select name="sport">
             <option disabled selected value="">Sport</option>    <!--creates empty disabled button for default choice-->
                 <!-- Loop through the list of sports and create an option for each one -->
