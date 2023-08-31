@@ -7,9 +7,16 @@
     <h1>Your Shopping Cart</h1>
     <ul>
         {% for book in books %}
-            <li>{{ book.title }} by {{ book.author }}, Price: ${{ book.price }}</li>
+            <li>
+                {{ book.title }} by {{ book.author }}, Price: ${{ book.price }}
+                <form action="/remove" method="POST">
+                    <input type="hidden" name="id" value="{{ book.id }}">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
         {% endfor %}
     </ul>
+    <h3>Total: ${{ total }}</h3>
     <a href="/">Continue Shopping</a>
 </body>
 </html>
