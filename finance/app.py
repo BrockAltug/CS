@@ -85,43 +85,53 @@ def login():
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
-    """Buy shares of stock"""
-
     if request.method == "POST":
+        # Ensure a stock symbol is provided
         symbol = request.form.get("symbol")
-        shares = int(request.form.get("shares"))
-
         if not symbol:
-            return apology("must provide stock symbol")
-        elif not shares:
-            return apology("must provide number of shares")
-        elif shares <= 0:
-            return apology("number of shares must be positive")
+            return apology("must provide a stock symbol", 400)
 
-        stock = lookup(symbol)
+        # Ensure a positive number of shares is provided
+        try:
+            shares = int(request.form.get("shares"))
+            if shares <= 0:
+                return apology("must provide a positive number of shares", 400)
+        except ValueError:
+            return apology("must provide a positive number of shares", 400)
 
-        if not stock:
-            return apology("invalid stock symbol")
+        # Retrieve the current stock price from Yahoo Finance
+        stock_data = lookup(symbol)
+        if stock_data is None:
+            return apology("invalid stock symbol", 400)
 
-        # Calculate the cost of shares
-        cost = stock["price"] * shares
+        price_per_share = stock_data["price"]
 
-        # Query user's cash balance
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
+        # Calculate the total cost of the purchase
+        total_cost = price_per_share * shares
 
-        if cash < cost:
-            return apology("not enough cash")
+        # Ensure the user has enough cash for the purchase
+        user_id = session["user_id"]
+        user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+        if user_cash < total_cost:
+            return apology("not enough cash to make the purchase", 400)
 
-        # Update user's cash balance
-        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", cost, session["user_id"])
+        # Perform the purchase
+        db.execute(
+            "INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
+            user_id,
+            symbol,
+            shares,
+            price_per_share,
+        )
 
-        # Record the transaction
-        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)", session["user_id"], stock["symbol"], shares, stock["price"])
+        # Update the user's cash balance
+        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", total_cost, user_id)
 
-        flash("Stock purchased successfully!")
-        return redirect(url_for("index"))
+        # Redirect to the portfolio page
+        return redirect("/")
 
     else:
+        # Display the buy form
         return render_template("buy.html")
 
 # Implement other routes for quote, sell, history, and registration here...
