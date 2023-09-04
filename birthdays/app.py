@@ -13,6 +13,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///birthdays.db")
 
+
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -21,12 +22,14 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 # Create a function to get the month name from a numeric value
 def get_month_name(month):
     if 1 <= month <= 12:
         return calendar.month_name[month]
     else:
         return "Invalid Month"
+
 
 # Route for both GET and POST requests
 @app.route("/", methods=["GET", "POST"])
@@ -38,12 +41,18 @@ def index():
         day = request.form.get("day")
 
         # Insert the data into the database
-        db.execute("INSERT INTO birthdays (name, month, day) VALUES (?, ?, ?)", name, month, day)
+        db.execute(
+            "INSERT INTO birthdays (name, month, day) VALUES (?, ?, ?)",
+            name,
+            month,
+            day,
+        )
 
     # Fetch all entries from the database or initialize as an empty list if there are no entries
     entries = db.execute("SELECT * FROM birthdays") or []
 
     return render_template("index.html", entries=entries, get_month_name=get_month_name)
+
 
 # Route to handle removal of birthdays
 @app.route("/remove/<int:id>", methods=["POST"])
@@ -53,6 +62,7 @@ def remove(id):
 
     # Redirect back to the main page
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run()
