@@ -1,39 +1,41 @@
 import os
-import requests
 import sqlite3
-import datetime
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for, g
 from flask_session import Session
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, lookup, usd
 
 app = Flask(__name__)
 
-# Check for environment variable
-if not os.getenv("finance.db"):
-    raise RuntimeError("DATABASE_URL is not set")
-
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Set up database
-engine = create_engine(os.getenv("finance.db"))
-db = scoped_session(sessionmaker(bind=engine))
+# Function to get a database connection
+def get_db():
+    if 'db' not in g:
+        g.db = sqlite3.connect('finance.db')
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+# Close database connection after each request
+@app.teardown_appcontext
+def close_db(e=None):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
 
 @app.route("/")
 @login_required
 def index():
-    # Retrieve user's portfolio data
+    db = get_db()  # Get the database connection
     user_id = session["user_id"]
-    rows = db.execute("SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = ? GROUP BY symbol", user_id).fetchall()
+    rows = db.execute("SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = ? GROUP BY symbol", (user_id,)).fetchall()
 
     portfolio = []
-    cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id).fetchone()["cash"]
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", (user_id,)).fetchone()["cash"]
 
     for row in rows:
         stock_data = lookup(row["symbol"])
