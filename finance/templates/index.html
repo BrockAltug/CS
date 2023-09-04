@@ -5,10 +5,9 @@
 {% endblock %}
 
 {% block main %}
-    <!-- Display user's portfolio here -->
-    <h1>Welcome to your portfolio!</h1>
-    <!-- Include a table to display stocks and cash balance -->
-    <table class="table table-striped">
+    <h1>Portfolio</h1>
+    <p>Cash Balance: ${{ cash_balance | usd }}</p>
+    <table class="table">
         <thead>
             <tr>
                 <th>Symbol</th>
@@ -19,4 +18,16 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through user's stocks and display them -->
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td>{{ stock.name }}</td>
+                    <td>{{ stock.shares }}</td>
+                    <td>${{ stock.price | usd }}</td>
+                    <td>${{ stock.total | usd }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total Portfolio Value: ${{ total_value | usd }}</p>
+{% endblock %}
