@@ -160,44 +160,64 @@ def quote():
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
-    """Sell shares of stock"""
-
     if request.method == "POST":
+        # Ensure a stock symbol is provided
         symbol = request.form.get("symbol")
-        shares = int(request.form.get("shares"))
-
         if not symbol:
-            return apology("must select a stock to sell")
-        elif shares <= 0:
-            return apology("number of shares must be positive")
+            return apology("must provide a stock symbol", 400)
 
-        stock = lookup(symbol)
+        # Ensure a positive number of shares is provided
+        try:
+            shares = int(request.form.get("shares"))
+            if shares <= 0:
+                return apology("must provide a positive number of shares", 400)
+        except ValueError:
+            return apology("must provide a positive number of shares", 400)
 
-        if not stock:
-            return apology("invalid stock symbol")
+        # Retrieve the current stock price from Yahoo Finance
+        stock_data = lookup(symbol)
+        if stock_data is None:
+            return apology("invalid stock symbol", 400)
 
-        # Query user's shares of the selected stock
-        user_shares = db.execute("SELECT SUM(shares) AS total_shares FROM transactions WHERE user_id = ? AND symbol = ?", session["user_id"], symbol)[0]["total_shares"]
+        price_per_share = stock_data["price"]
 
-        if user_shares is None or user_shares < shares:
-            return apology("not enough shares to sell")
+        # Get the user's current holdings of the specified stock
+        user_id = session["user_id"]
+        holdings = db.execute(
+            "SELECT symbol, SUM(shares) AS total_shares FROM transactions WHERE user_id = ? AND symbol = ? GROUP BY symbol",
+            user_id,
+            symbol,
+        )
+        if not holdings or holdings[0]["total_shares"] < shares:
+            return apology("not enough shares to sell", 400)
 
-        # Calculate the proceeds from the sale
-        proceeds = stock["price"] * shares
+        # Calculate the total value of the sale
+        total_value = price_per_share * shares
 
-        # Update user's cash balance
-        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", proceeds, session["user_id"])
+        # Perform the sale
+        db.execute(
+            "INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
+            user_id,
+            symbol,
+            -shares,  # Negative shares represent a sale
+            price_per_share,
+        )
 
-        # Record the sale transaction
-        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)", session["user_id"], stock["symbol"], -shares, stock["price"])
+        # Update the user's cash balance
+        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", total_value, user_id)
 
-        flash("Stock sold successfully!")
-        return redirect(url_for("index"))
+        # Redirect to the portfolio page
+        return redirect("/")
 
     else:
-        # Get the list of stocks owned by the user for the sell form
-        stocks = db.execute("SELECT DISTINCT symbol FROM transactions WHERE user_id = ? AND shares > 0", session["user_id"])
+        # Display the sell form with a list of stocks the user owns
+        user_id = session["user_id"]
+        stocks = db.execute(
+            "SELECT symbol FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
+            user_id,
+        )
         return render_template("sell.html", stocks=stocks)
+
 
 @app.route("/history")
 @login_required
