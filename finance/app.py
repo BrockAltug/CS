@@ -259,46 +259,36 @@ def history():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    """Register user"""
-
+    # Check if the request method is POST
     if request.method == "POST":
-        # Get user input
+        # Get the user's input
         username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
-        # Ensure username and password are provided and match
-        if not username:
-            return apology("must provide username")
-        elif not password:
-            return apology("must provide password")
-        elif password != confirmation:
-            return apology("passwords do not match")
+        # Check if the username already exists in the database
+        existing_user = db.execute("SELECT * FROM users WHERE username = :username", username=username)
+
+        if existing_user:
+            return apology("Username already exists")
+
+        # Check if the password and confirmation match
+        if password != confirmation:
+            return apology("Passwords do not match")
 
         # Hash the password
         hashed_password = generate_password_hash(password)
 
         # Insert the new user into the database
-        result = db.execute(
-            "INSERT INTO users (username, hash) VALUES (?, ?)",
-            username,
-            hashed_password,
-        )
+        db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hashed_password)
 
-        if not result:
-            return apology("username already exists")
-
-        # Log in the new user
-        user_id = db.execute("SELECT id FROM users WHERE username = ?", username)[0][
-            "id"
-        ]
-        session["user_id"] = user_id
-
-        # Redirect to the portfolio page
-        return redirect(url_for("index"))
+        # Redirect the user to the login page
+        return redirect("/login")
 
     else:
+        # If the request method is GET, render the registration page
         return render_template("register.html")
+
 
 
 @app.route("/logout", methods=["GET"])
