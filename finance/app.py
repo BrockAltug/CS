@@ -1,36 +1,34 @@
 import os
+import requests
 import sqlite3
-from flask import Flask, flash, redirect, render_template, request, session, url_for, g
+import datetime
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, lookup, usd
 
 app = Flask(__name__)
 
+# Check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
+
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Function to get a database connection
-def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect('finance.db')
-        g.db.row_factory = sqlite3.Row
-    return g.db
-
-# Close database connection after each request
-@app.teardown_appcontext
-def close_db(e=None):
-    db = g.pop('db', None)
-    if db is not None:
-        db.close()
+# Set up database
+engine = create_engine(os.getenv("DATABASE_URL"))
+db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 @login_required
 def index():
-    db = get_db()  # Get the database connection
+    # Retrieve user's portfolio data
     user_id = session["user_id"]
     rows = db.execute("SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = ? GROUP BY symbol", (user_id,)).fetchall()
 
@@ -72,17 +70,19 @@ def buy():
 
         total_cost = quote_data["price"] * int(shares)
 
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"]).fetchone()["cash"]
+        cash = db.execute("SELECT cash FROM users WHERE id = ?", (session["user_id"],)).fetchone()["cash"]
 
         if total_cost > cash:
             return apology("Not enough cash to buy")
 
         # Insert the purchase transaction into the database
         db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
-                   session["user_id"], symbol, int(shares), quote_data["price"])
+                   (session["user_id"], symbol, int(shares), quote_data["price"]))
 
         # Update the user's cash balance
-        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", total_cost, session["user_id"])
+        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", (total_cost, session["user_id"]))
+
+        db.commit()
 
         return redirect("/")
     else:
@@ -92,7 +92,7 @@ def buy():
 @login_required
 def history():
     user_id = session["user_id"]
-    rows = db.execute("SELECT * FROM transactions WHERE user_id = ?", user_id).fetchall()
+    rows = db.execute("SELECT * FROM transactions WHERE user_id = ?", (user_id,)).fetchall()
 
     transactions = []
 
@@ -123,7 +123,7 @@ def login():
             return apology("Password is required")
 
         # Query database for username
-        user = db.execute("SELECT * FROM users WHERE username = ?", username).fetchone()
+        user = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
 
         # Ensure username exists and password is correct
         if user is None or not check_password_hash(user["hash"], password):
@@ -186,7 +186,7 @@ def register():
         hashed_password = generate_password_hash(password)
 
         # Insert the new user into the database
-        result = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+        result = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", (username, hashed_password))
 
         if not result:
             return apology("Username already exists")
@@ -194,6 +194,8 @@ def register():
         # Log in the new user
         user_id = db.execute("SELECT last_insert_rowid() as id").fetchone()["id"]
         session["user_id"] = user_id
+
+        db.commit()
 
         return redirect("/")
     else:
@@ -221,86 +223,33 @@ def sell():
             return apology("Invalid symbol")
 
         user_id = session["user_id"]
-        user_shares = db.execute("SELECT SUM(shares) as total_shares FROM transactions WHERE user_id = ? AND symbol = ?", user_id, symbol).fetchone()["total_shares"]
 
-        if not user_shares or int(shares) > user_shares:
-            return apology("You don't own enough shares to sell")
+        # Check if the user owns enough shares to sell
+        shares_owned = db.execute("SELECT SUM(shares) as total_shares FROM transactions WHERE user_id = ? AND symbol = ? GROUP BY symbol",
+                                  (user_id, symbol)).fetchone()
+
+        if shares_owned is None or shares_owned["total_shares"] < int(shares):
+            return apology("Not enough shares to sell")
 
         total_earnings = quote_data["price"] * int(shares)
 
         # Insert the sell transaction into the database
         db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)",
-                   user_id, symbol, -int(shares), quote_data["price"])
+                   (user_id, symbol, -int(shares), quote_data["price"]))
 
         # Update the user's cash balance
-        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", total_earnings, user_id)
+        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", (total_earnings, user_id))
+
+        db.commit()
 
         return redirect("/")
     else:
-        # Retrieve user's stocks for selling
         user_id = session["user_id"]
-        rows = db.execute("SELECT symbol FROM transactions WHERE user_id = ? GROUP BY symbol", user_id).fetchall()
+        rows = db.execute("SELECT symbol FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
+                          (user_id,)).fetchall()
 
-        stocks = [row["symbol"] for row in rows]
-
-        return render_template("sell.html", stocks=stocks)
-
-# Personal Touch: Allow users to change their passwords
-@app.route("/changepassword", methods=["GET", "POST"])
-@login_required
-def changepassword():
-    if request.method == "POST":
-        current_password = request.form.get("current_password")
-        new_password = request.form.get("new_password")
-        confirmation = request.form.get("confirmation")
-
-        # Ensure all fields were submitted
-        if not current_password or not new_password or not confirmation:
-            return apology("All fields are required")
-
-        user_id = session["user_id"]
-        user = db.execute("SELECT * FROM users WHERE id = ?", user_id).fetchone()
-
-        # Ensure current password is correct
-        if not check_password_hash(user["hash"], current_password):
-            return apology("Current password is incorrect")
-
-        # Ensure new password and confirmation match
-        if new_password != confirmation:
-            return apology("New passwords must match")
-
-        # Hash the new password
-        hashed_password = generate_password_hash(new_password)
-
-        # Update the user's password in the database
-        db.execute("UPDATE users SET hash = ? WHERE id = ?", hashed_password, user_id)
-
-        return render_template("changepassword_success.html")
-
-    else:
-        return render_template("changepassword.html")
-
-# Personal Touch: Allow users to add additional cash to their account
-@app.route("/addcash", methods=["GET", "POST"])
-@login_required
-def addcash():
-    if request.method == "POST":
-        cash_to_add = request.form.get("cash_to_add")
-
-        # Ensure cash amount was submitted
-        if not cash_to_add:
-            return apology("Cash amount is required")
-
-        if not cash_to_add.isdigit() or int(cash_to_add) <= 0:
-            return apology("Invalid cash amount")
-
-        # Update the user's cash balance in the database
-        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", int(cash_to_add), session["user_id"])
-
-        return render_template("addcash_success.html")
-
-    else:
-        return render_template("addcash.html")
+        symbols = [row["symbol"] for row in rows]
+        return render_template("sell.html", symbols=symbols)
 
 if __name__ == '__main__':
     app.run(debug=True)
