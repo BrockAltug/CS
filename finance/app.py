@@ -1,7 +1,5 @@
 import os
-import requests
 import sqlite3
-import datetime
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -13,9 +11,8 @@ from helpers import apology, login_required, lookup, usd
 app = Flask(__name__)
 
 # Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
-
+if not os.path.exists("finance.db"):
+    raise RuntimeError("finance.db not found")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -23,8 +20,29 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine("sqlite:///finance.db")
 db = scoped_session(sessionmaker(bind=engine))
+
+@app.route("/")
+@login_required
+def index():
+    user_id = session["user_id"]
+    rows = db.execute("SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = ? GROUP BY symbol", (user_id,)).fetchall()
+
+    portfolio = []
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", (user_id,)).fetchone()["cash"]
+
+    for row in rows:
+        stock_data = lookup(row["symbol"])
+        total_value = row["total_shares"] * stock_data["price"]
+        portfolio.append({"symbol": row["symbol"],
+                          "shares": row["total_shares"],
+                          "price": usd(stock_data["price"]),
+                          "total": usd(total_value)})
+
+    grand_total = cash + sum([stock["total"] for stock in portfolio])
+
+    return render_template("index.html", portfolio=portfolio, cash=usd(cash), grand_total=usd(grand_total))
 
 @app.route("/")
 @login_required
