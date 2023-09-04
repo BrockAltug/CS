@@ -12,9 +12,12 @@
         </div>
         <div class="mb-3">
             <label for="shares" class="form-label">Number of Shares</label>
-            <input type="number" class="form-control" id="shares" name="shares" placeholder="Enter number of shares" required>
+            <input type="number" class="form-control" id="shares" name="shares" placeholder="Enter number of shares" required onchange="updateTotal()">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Stock Price</label>
+            <div id="price"></div>
         </div>
         <button type="submit" class="btn btn-primary">Buy</button>
     </form>
 {% endblock %}
-5
