@@ -37,5 +37,14 @@ def index():
 
     return render_template("index.html", entries=entries)
 
+# Route to handle removal of birthdays
+@app.route("/remove/<int:id>", methods=["POST"])
+def remove(id):
+    # Remove the birthday with the specified ID from the database
+    db.execute("DELETE FROM birthdays WHERE id = ?", id)
+
+    # Redirect back to the main page
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run()

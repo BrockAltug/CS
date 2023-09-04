@@ -31,6 +31,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Birthday</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,11 @@
                     <tr>
                         <td>{{ entry.name }}</td>
                         <td>{{ entry.month }} {{ entry.day }}</td>
+                        <td>
+                            <form method="POST" action="/remove/{{ entry.id }}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
