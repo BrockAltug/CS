@@ -2,6 +2,7 @@
 import os
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
+import calendar  # Import the calendar module
 
 # Configure application
 app = Flask(__name__)
@@ -20,6 +21,13 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+# Create a function to get the month name from a numeric value
+def get_month_name(month):
+    if 1 <= month <= 12:
+        return calendar.month_name[month]
+    else:
+        return "Invalid Month"
+
 # Route for both GET and POST requests
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -35,7 +43,7 @@ def index():
     # Fetch all entries from the database or initialize as an empty list if there are no entries
     entries = db.execute("SELECT * FROM birthdays") or []
 
-    return render_template("index.html", entries=entries)
+    return render_template("index.html", entries=entries, get_month_name=get_month_name)
 
 # Route to handle removal of birthdays
 @app.route("/remove/<int:id>", methods=["POST"])
