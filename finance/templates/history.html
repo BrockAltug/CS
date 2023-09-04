@@ -5,18 +5,27 @@
 {% endblock %}
 
 {% block main %}
+    <h2>Transaction History</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Type</th>
-                <th>Symbol</th>
-                <th>Price</th>
+                <th>Transaction Type</th>
+                <th>Stock Symbol</th>
                 <th>Shares</th>
-                <th>Date/Time</th>
+                <th>Price</th>
+                <th>Date & Time</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through and display transaction history -->
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction['type'] }}</td>
+                    <td>{{ transaction['symbol'] }}</td>
+                    <td>{{ transaction['shares'] }}</td>
+                    <td>${{ transaction['price']|round(2) }}</td>
+                    <td>{{ transaction['datetime'] }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

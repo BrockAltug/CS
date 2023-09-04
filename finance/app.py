@@ -222,12 +222,16 @@ def sell():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
+    # Query the transaction history for the logged-in user
+    transactions = db.execute(
+        "SELECT symbol, shares, price, datetime FROM transactions WHERE user_id = ? ORDER BY datetime DESC",
+        session["user_id"]
+    )
 
-    # Query transaction history for the user
-    transactions = db.execute("SELECT * FROM transactions WHERE user_id = ? ORDER BY timestamp DESC", session["user_id"])
-
+    # Render the "history.html" template with the transaction history data
     return render_template("history.html", transactions=transactions)
+
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
