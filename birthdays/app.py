@@ -32,8 +32,8 @@ def index():
         # Insert the data into the database
         db.execute("INSERT INTO birthdays (name, month, day) VALUES (?, ?, ?)", name, month, day)
 
-    # Fetch all entries from the database
-    entries = db.execute("SELECT * FROM birthdays")
+    # Fetch all entries from the database or initialize as an empty list if there are no entries
+    entries = db.execute("SELECT * FROM birthdays") or []
 
     return render_template("index.html", entries=entries)
 
