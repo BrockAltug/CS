@@ -1,15 +1,17 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    Get Stock Quote
-{% endblock %}
-
-{% block main %}
-    <h1>Get Stock Quote</h1>
-    <form action="/quote" method="post">
-        <div class="mb-3">
-            <input autofocus class="form-control" id="symbol" name="symbol" placeholder="Symbol" type="text">
-        </div>
-        <button class="btn btn-primary" type="submit">Get Quote</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote</title>
+</head>
+<body>
+    <h1>Get a Quote</h1>
+    <form method="POST">
+        <label for="symbol">Symbol</label>
+        <input type="text" id="symbol" name="symbol" required>
+        <br>
+        <input type="submit" value="Get Quote">
     </form>
-{% endblock %}
+</body>
+</html>
