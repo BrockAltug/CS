@@ -1,23 +1,74 @@
-/* Size for brand */
-nav .navbar-brand
-{
-    font-size: xx-large;
+/* Navbar */
+nav {
+    background-color: #333;
+    padding: 15px 0;
 }
 
-/* Colors for brand */
-nav .navbar-brand .blue
-{
-    color: #537fbe;
+.navbar-brand {
+    font-size: 36px;
+    color: #fff;
 }
-nav .navbar-brand .red
-{
-    color: #ea433b;
+
+.navbar-nav {
+    margin-top: 10px;
 }
-nav .navbar-brand .yellow
-{
-    color: #f5b82e;
+
+.nav-link {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
 }
-nav .navbar-brand .green
-{
-    color: #2e944b;
+
+/* Page Content */
+.container {
+    margin-top: 20px;
+}
+
+.page-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
 }
