@@ -1,13 +1,10 @@
 import os
-
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from helpers import apology, login_required, lookup, usd
 
-# Configure application
 app = Flask(__name__)
 
 # Custom filter
@@ -21,99 +18,97 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
-
+# Disable caching for all routes
 @app.after_request
 def after_request(response):
-    """Ensure responses aren't cached"""
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
 
-
 @app.route("/")
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
-
+    # TODO: Implement this route to display the user's portfolio
+    return render_template("index.html")
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
-
+    # TODO: Implement this route to allow users to buy shares
+    if request.method == "POST":
+        # Parse user input, validate, and execute the purchase
+        # Insert a record into the transaction history table
+        # Update user's cash balance and stock holdings
+        # Redirect user to the home page
+        return redirect("/")
+    else:
+        # Render the HTML form to buy stocks
+        return render_template("buy.html")
 
 @app.route("/history")
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
-
+    # TODO: Implement this route to display user's transaction history
+    return render_template("history.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-
-    # Forget any user_id
-    session.clear()
-
-    # User reached route via POST (as by submitting a form via POST)
+    # TODO: Implement this route to handle user login
     if request.method == "POST":
-
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            return apology("must provide username", 403)
-
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            return apology("must provide password", 403)
-
-        # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
-
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
+        # Check user credentials, log them in, and redirect to the home page
         return redirect("/")
-
-    # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("login.html")
-
 
 @app.route("/logout")
 def logout():
     """Log user out"""
-
-    # Forget any user_id
+    # TODO: Implement this route to log the user out
     session.clear()
-
-    # Redirect user to login form
     return redirect("/")
-
 
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
-
+    # TODO: Implement this route to allow users to get stock quotes
+    if request.method == "POST":
+        # Parse user input, call lookup function, and render the quote
+        return render_template("quoted.html", stock_info=stock_info)
+    else:
+        # Render the HTML form to get a stock quote
+        return render_template("quote.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
-
+    # TODO: Implement this route to allow users to register
+    if request.method == "POST":
+        # Parse user input, validate, hash the password, and register the user
+        return redirect("/login")
+    else:
+        # Render the HTML form to register a new user
+        return render_template("register.html")
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    # TODO: Implement this route to allow users to sell shares
+    if request.method == "POST":
+        # Parse user input, validate, and execute the sale
+        # Insert a record into the transaction history table
+        # Update user's cash balance and stock holdings
+        # Redirect user to the home page
+        return redirect("/")
+    else:
+        # Render the HTML form to sell stocks
+        return render_template("sell.html")
+
+if __name__ == "__main__":
+    app.run()

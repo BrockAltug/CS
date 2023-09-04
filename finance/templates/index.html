@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <!-- Display user's portfolio here -->
+    <h1>Welcome to your portfolio!</h1>
+    <!-- Include a table to display stocks and cash balance -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through user's stocks and display them -->
