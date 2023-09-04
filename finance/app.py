@@ -236,5 +236,16 @@ def register():
     else:
         return render_template("register.html")
 
+
+@app.route("/logout", methods=["GET"])
+@login_required
+def logout():
+    # Clear the user session to log them out
+    session.clear()
+    # Redirect to the homepage
+    return redirect("/")
+
+
+
 if __name__ == "__main__":
     app.run()
